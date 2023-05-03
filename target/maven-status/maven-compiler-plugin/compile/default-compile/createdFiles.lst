@@ -1,0 +1,4 @@
+gui\controllers\InventoryTab.class
+gui\controllers\HomeScreen.class
+gui\controllers\Controller.class
+main\Main.class
