@@ -1,5 +1,3 @@
-package main;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        URL url = new File("src/main/resources/fxml/homeScreen.fxml").toURI().toURL();
+        URL url = new File("src/main/java/gui/fxml/homeScreen.fxml").toURI().toURL();
         //Parent root = FXMLLoader.load(getClass().getResource("../../resources/fxml/example.fxml"));
         Parent root = FXMLLoader.load(url);
         primaryStage.setTitle("Hello World");

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <children>
+                <TitledPane collapsible="true" layoutX="-1.0" prefHeight="204.0" prefWidth="600.0" text="Ladu" textFill="#b80000">
+                    <font>
+                        <Font name="Times New Roman" size="16.0" />
+                    </font>
+                    <content>
+                        <TableView prefHeight="200.0" prefWidth="200.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="C1" />
+                                <TableColumn prefWidth="75.0" text="C2" />
+                            </columns>
+                        </TableView>
+                    </content>
+                </TitledPane>
+                <TitledPane collapsible="true" layoutX="-1.0" layoutY="196.0" prefHeight="204.0" prefWidth="600.0" text="Otsakorral olev materjal" textFill="#b80000">
+                    <font>
+                        <Font name="Times New Roman" size="16.0" />
+                    </font>
+                    <content>
+                        <TableView prefHeight="200.0" prefWidth="200.0">
+                            <columns>
+                                <TableColumn prefWidth="75.0" text="C1" />
+                                <TableColumn prefWidth="75.0" text="C2" />
+                            </columns>
+                        </TableView>
+                    </content>
+                </TitledPane>
+            </children>
+        </AnchorPane>
+    </items>
+</SplitPane>

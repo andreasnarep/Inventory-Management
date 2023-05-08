@@ -1,4 +1,5 @@
 gui\controllers\InventoryTab.class
-gui\controllers\HomeScreen.class
+Main.class
 gui\controllers\Controller.class
-main\Main.class
+gui\controllers\HomeScreen.class
+objects\Material.class
