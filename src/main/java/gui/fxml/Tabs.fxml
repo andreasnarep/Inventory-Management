@@ -5,9 +5,9 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
          prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.Tabs">
     <tabs>
-        <Tab text="Untitled Tab 1">
+        <Tab text="Pealeht">
             <content>
                 <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <right>
@@ -19,20 +19,25 @@
                 </BorderPane>
             </content>
         </Tab>
-        <Tab text="Untitled Tab 2">
+        <Tab text="BQ aknad ja uksed">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
             </content>
         </Tab>
-        <Tab text="Untitled Tab 3">
+        <Tab text="Polo uksed">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
             </content>
         </Tab>
         <Tab text="Ladu">
             <content>
-                <fx:include fx:id="inventoryTab" source="inventoryTab.fxml"/>
+                <fx:include fx:id="inventoryTab" source="InventoryPage.fxml"/>
            </content>
+        </Tab>
+        <Tab text="Tellimused">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+            </content>
         </Tab>
         <Tab text="Katseta">
             <content>

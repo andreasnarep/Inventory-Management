@@ -1,4 +1,4 @@
 package gui.controllers;
 
-public class HomeScreen {
+public class TestingPage {
 }

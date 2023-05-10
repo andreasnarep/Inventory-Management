@@ -4,19 +4,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane fx:controller="gui.controllers.InventoryPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
             <children>
-                <TitledPane collapsible="true" layoutX="-1.0" prefHeight="204.0" prefWidth="600.0" text="Ladu" textFill="#b80000">
+                <TitledPane collapsible="true" layoutX="-1.0" prefHeight="204.0" prefWidth="600.0" text="Ladu">
                     <font>
                         <Font name="Times New Roman" size="16.0" />
                     </font>
                     <content>
                         <TableView prefHeight="200.0" prefWidth="200.0">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="C1" />
-                                <TableColumn prefWidth="75.0" text="C2" />
+                                <TableColumn prefWidth="379.80001221895236" text="Materjal" />
+                                <TableColumn prefWidth="218.39999999999998" text="Kogus" />
                             </columns>
                         </TableView>
                     </content>
@@ -28,8 +28,8 @@
                     <content>
                         <TableView prefHeight="200.0" prefWidth="200.0">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="C1" />
-                                <TableColumn prefWidth="75.0" text="C2" />
+                                <TableColumn prefWidth="379.80001221895236" text="Materjal" />
+                                <TableColumn prefWidth="218.39999999999998" text="Kogus" />
                             </columns>
                         </TableView>
                     </content>

@@ -3,7 +3,7 @@ package gui.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class InventoryTab {
+public class InventoryPage {
     @FXML private Button buttonOne;
 
     @FXML
