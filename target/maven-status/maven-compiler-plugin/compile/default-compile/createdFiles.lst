@@ -1,5 +1,10 @@
-gui\controllers\InventoryTab.class
+gui\controllers\MainPage.class
 Main.class
-gui\controllers\Controller.class
-gui\controllers\HomeScreen.class
 objects\Material.class
+gui\controllers\Tabs.class
+gui\controllers\PoloPage.class
+gui\controllers\OrdersPage.class
+gui\controllers\TestingPage.class
+gui\controllers\BQDoorsPage.class
+gui\controllers\InventoryPage.class
+gui\controllers\BQWindowsPage.class
