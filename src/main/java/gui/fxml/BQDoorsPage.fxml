@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
 <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.PoloPage">
     <center>
@@ -20,7 +23,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <Label prefHeight="18.0" prefWidth="159.0" text="Valige valmistatud Polo uks:" textAlignment="RIGHT"/>
+                <Label prefHeight="18.0" prefWidth="159.0" text="Valige valmistatud BQ uks:" textAlignment="RIGHT"/>
                 <Label text="Sisestage valmistatud kogus:" GridPane.rowIndex="1"/>
                 <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1"/>
                 <Button mnemonicParsing="false" text="Sisesta" GridPane.columnIndex="1" GridPane.rowIndex="2"/>

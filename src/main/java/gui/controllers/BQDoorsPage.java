@@ -1,4 +1,4 @@
 package gui.controllers;
 
-public class BQPage {
+public class BQDoorsPage {
 }

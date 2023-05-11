@@ -12,9 +12,14 @@
                 <fx:include fx:id="mainPage" source="MainPage.fxml"/>
             </content>
         </Tab>
-        <Tab text="BQ aknad ja uksed">
+        <Tab text="BQ uksed">
             <content>
-                <fx:include fx:id="bqPage" source="BQPage.fxml"/>
+                <fx:include fx:id="bqDoorsPage" source="BQDoorsPage.fxml"/>
+            </content>
+        </Tab>
+        <Tab text="BQ aknad">
+            <content>
+                <fx:include fx:id="bqWindowsPage" source="BQWindowsPage.fxml"/>
             </content>
         </Tab>
         <Tab text="Polo uksed">
