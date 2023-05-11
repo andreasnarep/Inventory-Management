@@ -6,9 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="gui.controllers.MainPage"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+            prefHeight="400.0" prefWidth="600.0"
+            minHeight="0.0" minWidth="0.0">
+    <right>
+        <Button mnemonicParsing="false" text="Button" BorderPane.alignment="BOTTOM_LEFT"/>
+    </right>
+    <bottom>
+        <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER"/>
+    </bottom>
+</BorderPane>

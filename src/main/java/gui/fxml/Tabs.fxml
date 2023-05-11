@@ -9,39 +9,32 @@
     <tabs>
         <Tab text="Pealeht">
             <content>
-                <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <right>
-                        <Button mnemonicParsing="false" text="Button" BorderPane.alignment="BOTTOM_LEFT"/>
-                    </right>
-                    <bottom>
-                        <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER"/>
-                    </bottom>
-                </BorderPane>
+                <fx:include fx:id="mainPage" source="MainPage.fxml"/>
             </content>
         </Tab>
         <Tab text="BQ aknad ja uksed">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                <fx:include fx:id="bqPage" source="BQPage.fxml"/>
             </content>
         </Tab>
         <Tab text="Polo uksed">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                <fx:include fx:id="poloPage" source="PoloPage.fxml"/>
             </content>
         </Tab>
         <Tab text="Ladu">
             <content>
-                <fx:include fx:id="inventoryTab" source="InventoryPage.fxml"/>
+                <fx:include fx:id="inventoryPage" source="InventoryPage.fxml"/>
            </content>
         </Tab>
         <Tab text="Tellimused">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                <fx:include fx:id="ordersPage" source="OrdersPage.fxml"/>
             </content>
         </Tab>
         <Tab text="Katseta">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                <fx:include fx:id="testingPage" source="TestingPage.fxml"/>
             </content>
         </Tab>
     </tabs>
