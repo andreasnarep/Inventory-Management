@@ -1,10 +1,12 @@
-gui\controllers\MainPage.class
-Main.class
 objects\Material.class
-gui\controllers\Tabs.class
 gui\controllers\PoloPage.class
 gui\controllers\OrdersPage.class
 gui\controllers\TestingPage.class
 gui\controllers\BQDoorsPage.class
+gui\controllers\MainPage.class
+Main.class
+gui\controllers\Tabs.class
+TestForJSON.class
 gui\controllers\InventoryPage.class
+objects\PoloDoor.class
 gui\controllers\BQWindowsPage.class

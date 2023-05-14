@@ -2,3 +2,10 @@ Features that need to be added first:
     1) Inventory page
     2) Adding completed doors and windows, both BQ and polo
     3) Some kind of main page design - counting of completed doors and windows
+
+
+JSON data architecture:
+    1) One JSON file for the whole inventory
+    2) Three separate JSON files for each door and window type,
+    which contains the names of the door/window and the material which
+    that door/window is made out of
