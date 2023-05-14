@@ -1,11 +1,12 @@
+import objects.Door;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.json.*;
-import javax.json.stream.JsonParser;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestForJSON {
     public static void main(String[] args) throws IOException, ParseException {
@@ -13,10 +14,24 @@ public class TestForJSON {
 
         JSONParser jsonParser = new JSONParser();
 
-        JSONArray jsonObject = (JSONArray) jsonParser.parse(new FileReader(filePath));
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(new FileReader(filePath));
+        Door[] doors = new Door[jsonArray.size()];
+        int i = 0;
 
-        System.out.println(jsonObject.get(0));
-        System.out.println(jsonObject.get(1));
-        //System.out.println(jsonArray);
+        for (Object object : jsonArray.toArray()) {
+            String poloDoorName = (String) ((JSONObject) object).get("name");
+            JSONObject materialsJSONObject = (JSONObject) ((JSONObject) object).get("materials");
+            Map<String, Long> materialsMap = new HashMap<>();
+
+            for (Object key : materialsJSONObject.keySet()) {
+                materialsMap.put((String) key, (Long) materialsJSONObject.get(key));
+            }
+
+            doors[i] = new Door(poloDoorName, materialsMap);
+            i++;
+        }
+
+        for (Door door : doors)
+            System.out.println(door);
     }
 }
