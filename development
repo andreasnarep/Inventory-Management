@@ -9,3 +9,9 @@ JSON data architecture:
     2) Three separate JSON files for each door and window type,
     which contains the names of the door/window and the material which
     that door/window is made out of
+    3) One JSON file for Inventory
+
+Adding of orders:
+    1) Some kind of bigger object (identified by order number or something similar), which contains all
+    of the materials ordered, so that each ordered material doesn't have to be picked manually, when the order
+    has arrived. Only the order number is picked, when it has arrived.

@@ -14,6 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Logic logic = new Logic();
         URL url = new File("src/main/java/gui/fxml/Tabs.fxml").toURI().toURL();
         //Parent root = FXMLLoader.load(getClass().getResource("../../resources/fxml/example.fxml"));
         Parent root = FXMLLoader.load(url);

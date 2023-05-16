@@ -27,7 +27,7 @@
                </TextField>
                     <Label prefHeight="18.0" prefWidth="159.0" text="Tellitav ese:" textAlignment="RIGHT" GridPane.rowIndex="1" />
                     <Label text="Kogus:" GridPane.rowIndex="2" />
-                    <Button mnemonicParsing="false" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Button onAction="#addNewOrder" mnemonicParsing="false" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     <Spinner editable="true" prefHeight="26.0" prefWidth="66.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <valueFactory>
                             <SpinnerValueFactory.IntegerSpinnerValueFactory max="1000" min="0" />
@@ -57,7 +57,7 @@
                 <children>
                     <Label prefHeight="18.0" prefWidth="159.0" text="Tellimus:" textAlignment="RIGHT" GridPane.rowIndex="1" />
                     <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Button mnemonicParsing="false" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Button onAction="#confirmArrivedOrder" mnemonicParsing="false" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <Label text="Kohalejõudnud tellimus" GridPane.columnIndex="1">
                         <font>
                             <Font size="14.0" />
