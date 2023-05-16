@@ -1,0 +1,17 @@
+[
+  {
+    "name": "605x1537",
+    "quantity": 20,
+    "lowerLimit": 5
+  },
+  {
+    "name": "asd",
+    "quantity": 40,
+    "lowerLimit": 5
+  },
+  {
+    "name": "bgd",
+    "quantity": 50,
+    "lowerLimit": 10
+  }
+]

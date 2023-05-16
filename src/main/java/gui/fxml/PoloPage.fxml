@@ -23,7 +23,7 @@
                 <Label prefHeight="18.0" prefWidth="159.0" text="Valige valmistatud Polo uks:" textAlignment="RIGHT"/>
                 <Label text="Sisestage valmistatud kogus:" GridPane.rowIndex="1"/>
                 <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1"/>
-                <Button mnemonicParsing="false" text="Sisesta" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Button onAction="#insertButtonPressed" mnemonicParsing="false" text="Sisesta" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                 <Spinner editable="true" prefHeight="26.0" prefWidth="66.0" GridPane.columnIndex="1"
                          GridPane.rowIndex="1">
                     <valueFactory>
@@ -36,7 +36,7 @@
     <right>
         <TableView prefHeight="357.0" prefWidth="246.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn prefWidth="156.40003049373627" text="Valmistatud uksed"/>
+                <TableColumn prefWidth="156.40003049373627" text="Valmistatud Polo uksed"/>
                 <TableColumn prefWidth="88.39996337890625" text="Kogus"/>
             </columns>
             <BorderPane.margin>
@@ -55,7 +55,7 @@
                         <Insets top="15.0"/>
                     </HBox.margin>
                 </Region>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="43.0" text="↩"
+                <Button onAction="#rollbackInsertedData" mnemonicParsing="false" prefHeight="38.0" prefWidth="43.0" text="↩"
                         style="-fx-background-color: #ff0000">
                     <font>
                         <Font size="24.0"/>
@@ -64,7 +64,7 @@
                         <Insets top="3.0"/>
                     </padding>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="40.0" text="✔"
+                <Button onAction="#confirmInsertedData" mnemonicParsing="false" prefHeight="38.0" prefWidth="40.0" text="✔"
                         style="-fx-background-color: #00FF68">
                     <font>
                         <Font size="14.0"/>
