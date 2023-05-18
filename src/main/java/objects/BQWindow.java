@@ -22,10 +22,12 @@ public class BQWindow {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append( "{" );
 
         for (String key : materialNameAndQuantity.keySet())
-            sb.append(key + " - " + materialNameAndQuantity.get(key) + "\n");
+            sb.append(key + " - " + materialNameAndQuantity.get(key) + ", ");
 
-        return windowName + "\n" + sb.toString();
+        sb.append( "}" );
+        return "(BQWINDOW) " + windowName + " - " + sb.toString();
     }
 }

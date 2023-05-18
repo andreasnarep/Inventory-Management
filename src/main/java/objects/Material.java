@@ -14,6 +14,6 @@ public class Material {
 
     @Override
     public String toString() {
-        return "Name: " + name + ", Quantity: " + quantity + ", Lower limit: " + lowerLimit;
+        return "(MATERIAL) " + name + ", Quantity: " + quantity + ", Lower limit: " + lowerLimit;
     }
 }

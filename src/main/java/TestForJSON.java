@@ -27,7 +27,7 @@ public class TestForJSON {
                 materialsMap.put((String) key, (Long) materialsJSONObject.get(key));
             }
 
-            doors[i] = new Door(poloDoorName, materialsMap);
+            //doors[i] = new Door(poloDoorName, materialsMap);
             i++;
         }
 

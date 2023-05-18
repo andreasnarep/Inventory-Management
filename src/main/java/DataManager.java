@@ -5,24 +5,26 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DataManager {
 
     private static final Logger logger = Logger.getLogger( PoloPage.class.getName() );
     private static final String[] filesToRead = {"BQDoors.json", "BQWindows.json", "Inventory.json",
-            "Orders.json", "PoloDoors.json"};
+            "Orders.json", "PoloDoors.json", "CompletedBQDoors.json",
+            "CompletedBQWindows.json", "CompletedPoloDoors.json"};
     private PoloDoor[] poloDoors;
     private BQDoor[] bqDoors;
     private BQWindow[] bqWindows;
     private Material[] inventory;
+    private CompletedPoloDoor[] completedPoloDoors;
+    private CompletedBQDoor[] completedBQDoors;
+    private CompletedBQWindow[] completedBQWindows;
     private DataReader dataReader;
 
     DataManager() {
@@ -33,16 +35,19 @@ public class DataManager {
         for ( String file : filesToRead ) {
             switch ( file ) {
                 case "BQDoors.json":
-                    bqDoors = dataReader.read( file, bqDoors );
+                    bqDoors = dataReader.readBQDoors();
                     break;
                 case "PoloDoors.json":
-                    poloDoors = dataReader.read( file, poloDoors );
+                    poloDoors = dataReader.readPoloDoors();
                     break;
                 case "BQWindows.json":
-                    bqWindows = dataReader.read( file, bqWindows );
+                    bqWindows = dataReader.readBQWindows();
                     break;
                 case "Inventory.json":
-                    inventory = dataReader.read( file, inventory );
+                    inventory = dataReader.readInventory();
+                    break;
+                case "CompletedPoloDoors.json":
+                    completedPoloDoors = dataReader.readCompletedPoloDoors();
                     break;
                 default: //TODO Throw error once all of the cases have been covered.
                     System.out.println( "default" );
@@ -65,17 +70,21 @@ public class DataManager {
         System.out.println( "----------------" );
         for ( Material material : inventory )
             System.out.println( material );
+
+        System.out.println( "----------------" );
+        for ( CompletedPoloDoor door : completedPoloDoors )
+            System.out.println( door );
     }
 }
 
 class DataReader {
-    public BQDoor[] read( String filePath, BQDoor[] doors ) throws IOException, ParseException {
-        filePath = "src/main/resources/data/" + filePath;
+    public BQDoor[] readBQDoors() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/BQDoors.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        doors = new BQDoor[jsonArray.size()];
+        BQDoor[] doors = new BQDoor[jsonArray.size()];
         int i = 0;
 
         for ( Object object : jsonArray.toArray() ) {
@@ -95,13 +104,13 @@ class DataReader {
         return doors;
     }
 
-    public PoloDoor[] read( String filePath, PoloDoor[] doors ) throws IOException, ParseException {
-        filePath = "src/main/resources/data/" + filePath;
+    public PoloDoor[] readPoloDoors() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/PoloDoors.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        doors = new PoloDoor[jsonArray.size()];
+        PoloDoor[] doors = new PoloDoor[jsonArray.size()];
         int i = 0;
 
         for ( Object object : jsonArray.toArray() ) {
@@ -121,13 +130,13 @@ class DataReader {
         return doors;
     }
 
-    public BQWindow[] read( String filePath, BQWindow[] windows ) throws IOException, ParseException {
-        filePath = "src/main/resources/data/" + filePath;
+    public BQWindow[] readBQWindows() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/BQWindows.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        windows = new BQWindow[jsonArray.size()];
+        BQWindow[] windows = new BQWindow[jsonArray.size()];
         int i = 0;
 
         for ( Object object : jsonArray.toArray() ) {
@@ -147,13 +156,13 @@ class DataReader {
         return windows;
     }
 
-    public Material[] read( String filePath, Material[] inventory ) throws IOException, ParseException {
-        filePath = "src/main/resources/data/" + filePath;
+    public Material[] readInventory() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/Inventory.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        inventory = new Material[jsonArray.size()];
+        Material[] inventory = new Material[jsonArray.size()];
         int i = 0;
 
         for ( Object object : jsonArray.toArray() ) {
@@ -167,5 +176,27 @@ class DataReader {
 
         fileReader.close();
         return inventory;
+    }
+
+    public CompletedPoloDoor[] readCompletedPoloDoors() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/CompletedPoloDoors.json";
+        JSONParser jsonParser = new JSONParser();
+
+        FileReader fileReader = new FileReader( filePath );
+        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
+        CompletedPoloDoor[] doors = new CompletedPoloDoor[jsonArray.size()];
+        int i = 0;
+
+        for ( Object object : jsonArray.toArray() ) {
+            String windowName = (String) ( (JSONObject) object ).get( "name" );
+            String date = (String) ( (JSONObject) object).get( "date" );
+            Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
+
+            doors[i] = new CompletedPoloDoor( windowName, date, quantity );
+            i++;
+        }
+
+        fileReader.close();
+        return doors;
     }
 }
