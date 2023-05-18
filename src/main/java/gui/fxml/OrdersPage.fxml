@@ -7,27 +7,29 @@
 
 <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.OrdersPage">
     <center>
-        <VBox spacing="50.0">
-            <GridPane hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="316.0" vgap="15.0">
+        <VBox spacing="70.0">
+            <GridPane hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="316.0" vgap="15.0">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="62.2" />
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.80000000000004" minWidth="10.0" prefWidth="237.80000000000004" />
                 </columnConstraints>
                 <rowConstraints>
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="31.4" minHeight="0.0" prefHeight="22.8" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="31.4" minHeight="0.0" prefHeight="1.2000000000000028" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="48.39999999999999" minHeight="0.0" prefHeight="25.79999999999999" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="70.79999237060545" minHeight="0.0" prefHeight="3.0" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="148.59999999999997" minHeight="10.0" prefHeight="126.19999999999997" vgrow="SOMETIMES" />
+               <RowConstraints maxHeight="133.6" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <children>
-               <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <GridPane.margin>
                      <Insets right="60.0" />
                   </GridPane.margin>
-               </TextField>
+               </ChoiceBox>
                     <Label prefHeight="18.0" prefWidth="159.0" text="Tellitav ese:" textAlignment="RIGHT" GridPane.rowIndex="1" />
                     <Label text="Kogus:" GridPane.rowIndex="2" />
-                    <Button onAction="#addNewOrder" mnemonicParsing="false" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Button mnemonicParsing="false" onAction="#addNewOrderComponent" text="Lisa" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     <Spinner editable="true" prefHeight="26.0" prefWidth="66.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <valueFactory>
                             <SpinnerValueFactory.IntegerSpinnerValueFactory max="1000" min="0" />
@@ -38,6 +40,11 @@
                      <Font size="14.0" />
                   </font>
                </Label>
+               <ListView fx:id="listView" prefHeight="126.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <GridPane.margin>
+                     <Insets right="10.0" />
+                  </GridPane.margin></ListView>
+               <Button onAction="#addNewOrder" mnemonicParsing="false" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 </children>
             <VBox.margin>
                <Insets />
@@ -57,7 +64,7 @@
                 <children>
                     <Label prefHeight="18.0" prefWidth="159.0" text="Tellimus:" textAlignment="RIGHT" GridPane.rowIndex="1" />
                     <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Button onAction="#confirmArrivedOrder" mnemonicParsing="false" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Button mnemonicParsing="false" onAction="#confirmArrivedOrder" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <Label text="Kohalejõudnud tellimus" GridPane.columnIndex="1">
                         <font>
                             <Font size="14.0" />
@@ -66,7 +73,7 @@
                 </children>
             </GridPane>
          <BorderPane.margin>
-            <Insets left="25.0" top="75.0" />
+            <Insets left="25.0" top="20.0" />
          </BorderPane.margin>
         </VBox>
     </center>

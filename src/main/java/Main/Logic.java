@@ -1,4 +1,5 @@
-import gui.controllers.PoloPage;
+package Main;
+
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -14,5 +15,9 @@ public class Logic {
         dataManager = new DataManager();
         dataManager.readData();
         logger.log( Level.INFO, "All of  the data read succesfully." );
+    }
+
+    public static DataManager getDataManager() {
+        return dataManager;
     }
 }

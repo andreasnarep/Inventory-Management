@@ -12,6 +12,11 @@ public class Material {
         this.lowerLimit = lowerLimit;
     }
 
+    public Material(String name, long quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "(MATERIAL) " + name + ", Quantity: " + quantity + ", Lower limit: " + lowerLimit;

@@ -1,6 +1,5 @@
 Features that need to be added first:
-    1) Inventory page
-    2) Adding completed doors and windows, both BQ and polo
+    1) Ordering multiple glasses under one order number
     3) Some kind of main page design - counting of completed doors and windows
 
 
@@ -13,5 +12,6 @@ JSON data architecture:
 
 Adding of orders:
     1) Some kind of bigger object (identified by order number or something similar), which contains all
-    of the materials ordered, so that each ordered material doesn't have to be picked manually, when the order
+    of the glasses ordered, so that each ordered glass doesn't have to be picked manually, when the order
     has arrived. Only the order number is picked, when it has arrived.
+    2) For materials, there are standard containers.

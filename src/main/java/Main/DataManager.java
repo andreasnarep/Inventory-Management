@@ -1,3 +1,5 @@
+package Main;
+
 import gui.controllers.PoloPage;
 import objects.*;
 import org.json.simple.JSONArray;
@@ -7,7 +9,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
