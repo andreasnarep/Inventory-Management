@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +25,7 @@ public class Main extends Application {
         URL url = new File("src/main/java/gui/fxml/Tabs.fxml").toURI().toURL();
         //Parent root = FXMLLoader.load(getClass().getResource("../../resources/fxml/example.fxml"));
         Parent root = FXMLLoader.load(url);
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Varola");
         primaryStage.setScene(new Scene(root, 600, 475));
         primaryStage.show();
         logger.log( Level.INFO, "GUI started succesfully." );

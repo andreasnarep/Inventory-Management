@@ -1,21 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.controllers.MainPage"
-            prefHeight="400.0" prefWidth="600.0"
-            minHeight="0.0" minWidth="0.0">
-    <right>
-        <Button mnemonicParsing="false" text="Button" BorderPane.alignment="BOTTOM_LEFT"/>
-    </right>
-    <bottom>
-        <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER"/>
-    </bottom>
+<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainPage">
+    <top>
+        <GridPane alignment="CENTER" prefHeight="122.0" prefWidth="600.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="53.6" minHeight="10.0" prefHeight="49.6" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="46.8" minHeight="10.0" prefHeight="32.20000000000001" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.39999999999999" minHeight="10.0" prefHeight="35.39999999999999" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="See kuu valmistatud" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <Label text="BQ uksi" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Label" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="BQ aknaid" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Polo uksi" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+            <ChoiceBox prefWidth="150.0" value="Vali kuu" GridPane.columnIndex="2" />
+            </children>
+        </GridPane>
+    </top>
+    <center>
+        <GridPane alignment="CENTER" prefHeight="122.0" prefWidth="600.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="53.6" minHeight="10.0" prefHeight="49.6" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="46.8" minHeight="10.0" prefHeight="32.20000000000001" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.39999999999999" minHeight="10.0" prefHeight="35.39999999999999" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Kokku valmistatud" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <Label text="BQ uksi" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="5" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="BQ aknaid" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="12" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+               <effect>
+                  <Bloom />
+               </effect>
+                </Label>
+                <Label text="Polo uksi" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="25" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </GridPane>
+    </center>
 </BorderPane>

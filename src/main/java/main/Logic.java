@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import org.json.simple.parser.ParseException;
 

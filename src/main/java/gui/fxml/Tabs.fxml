@@ -37,10 +37,10 @@
                 <fx:include fx:id="ordersPage" source="OrdersPage.fxml"/>
             </content>
         </Tab>
-        <Tab text="Katseta">
+        <!--Tab text="Katseta">
             <content>
                 <fx:include fx:id="testingPage" source="TestingPage.fxml"/>
             </content>
-        </Tab>
+        </Tab-->
     </tabs>
 </TabPane>

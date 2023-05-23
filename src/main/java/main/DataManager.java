@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import gui.controllers.PoloPage;
 import objects.*;
@@ -50,23 +50,17 @@ public class DataManager {
                 case "CompletedPoloDoors.json":
                     completedPoloDoors = dataReader.readCompletedPoloDoors();
                     break;
+                case "CompletedBQDoors.json":
+                    completedBQDoors = dataReader.readCompletedBQDoors();
+                    break;
+                case "CompletedBQWindows.json":
+                    completedBQWindows = dataReader.readCompletedBQWindows();
+                    break;
                 default: //TODO Throw error once all of the cases have been covered.
                     System.out.println( "default" );
                     //throw new FileNotFoundException();
             }
         }
-
-
-        for ( PoloDoor door : poloDoors )
-            System.out.println( door );
-
-        System.out.println( "----------------" );
-        for ( BQDoor door : bqDoors )
-            System.out.println( door );
-
-        System.out.println( "----------------" );
-        for ( BQWindow window : bqWindows )
-            System.out.println( window );
 
         System.out.println( "----------------" );
         for ( Material material : inventory )
@@ -75,6 +69,14 @@ public class DataManager {
         System.out.println( "----------------" );
         for ( CompletedPoloDoor door : completedPoloDoors )
             System.out.println( door );
+
+        System.out.println( "----------------" );
+        for ( CompletedBQDoor door : completedBQDoors )
+            System.out.println( door );
+
+        System.out.println( "----------------" );
+        for ( CompletedBQWindow window : completedBQWindows )
+            System.out.println( window );
     }
 }
 
@@ -189,11 +191,55 @@ class DataReader {
         int i = 0;
 
         for ( Object object : jsonArray.toArray() ) {
+            String doorName = (String) ( (JSONObject) object ).get( "name" );
+            String date = (String) ( (JSONObject) object).get( "date" );
+            Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
+
+            doors[i] = new CompletedPoloDoor( doorName, date, quantity );
+            i++;
+        }
+
+        fileReader.close();
+        return doors;
+    }
+
+    public CompletedBQDoor[] readCompletedBQDoors() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/CompletedBQDoors.json";
+        JSONParser jsonParser = new JSONParser();
+
+        FileReader fileReader = new FileReader( filePath );
+        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
+        CompletedBQDoor[] doors = new CompletedBQDoor[jsonArray.size()];
+        int i = 0;
+
+        for ( Object object : jsonArray.toArray() ) {
+            String doorName = (String) ( (JSONObject) object ).get( "name" );
+            String date = (String) ( (JSONObject) object).get( "date" );
+            Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
+
+            doors[i] = new CompletedBQDoor( doorName, date, quantity );
+            i++;
+        }
+
+        fileReader.close();
+        return doors;
+    }
+
+    public CompletedBQWindow[] readCompletedBQWindows() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/CompletedBQWindows.json";
+        JSONParser jsonParser = new JSONParser();
+
+        FileReader fileReader = new FileReader( filePath );
+        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
+        CompletedBQWindow[] doors = new CompletedBQWindow[jsonArray.size()];
+        int i = 0;
+
+        for ( Object object : jsonArray.toArray() ) {
             String windowName = (String) ( (JSONObject) object ).get( "name" );
             String date = (String) ( (JSONObject) object).get( "date" );
             Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
 
-            doors[i] = new CompletedPoloDoor( windowName, date, quantity );
+            doors[i] = new CompletedBQWindow( windowName, date, quantity );
             i++;
         }
 

@@ -1,8 +1,5 @@
 package gui.controllers;
 
-import Main.DataManager;
-import Main.Logic;
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
