@@ -4,14 +4,14 @@ import java.util.Map;
 
 public class PoloDoor extends Door{
 
-    private Map<String, Long> materialNameAndQuantity;
+    private Map<String, Integer> materialNameAndQuantity;
 
-    public PoloDoor(String doorName, Map<String, Long> materialNameAndQuantity) {
+    public PoloDoor( String doorName, Map<String, Integer> materialNameAndQuantity) {
         super(doorName);
         this.materialNameAndQuantity = materialNameAndQuantity;
     }
 
-    public Map<String, Long> getMaterialNameAndQuantity() {
+    public Map<String, Integer> getMaterialNameAndQuantity() {
         return materialNameAndQuantity;
     }
 

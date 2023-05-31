@@ -2,7 +2,7 @@ gui\controllers\PoloPage.class
 gui\controllers\OrdersPage.class
 gui\controllers\TestingPage.class
 main\Logic.class
-main\Main.class
+Main.class
 gui\controllers\Tabs.class
 objects\CompletedBQWindow.class
 TestForJSON.class

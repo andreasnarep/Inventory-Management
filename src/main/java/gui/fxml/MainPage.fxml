@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
@@ -54,7 +56,24 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-            <ChoiceBox prefWidth="150.0" value="Vali kuu" GridPane.columnIndex="2" />
+                <ChoiceBox fx:id="months" prefWidth="150.0" value="Vali kuu" GridPane.columnIndex="2">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Jaanuar" />
+                            <String fx:value="Veebruar" />
+                            <String fx:value="Märts" />
+                            <String fx:value="Aprill" />
+                            <String fx:value="Mai" />
+                            <String fx:value="Juuni" />
+                            <String fx:value="Juuli" />
+                            <String fx:value="August" />
+                            <String fx:value="September" />
+                            <String fx:value="Oktoober" />
+                            <String fx:value="November" />
+                            <String fx:value="Detsember" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
             </children>
         </GridPane>
     </top>
@@ -95,9 +114,9 @@
                     <font>
                         <Font size="18.0" />
                     </font>
-               <effect>
-                  <Bloom />
-               </effect>
+                    <effect>
+                        <Bloom />
+                    </effect>
                 </Label>
                 <Label text="Polo uksi" GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <font>

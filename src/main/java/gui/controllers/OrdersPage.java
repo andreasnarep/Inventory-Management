@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class OrdersPage {
 
-    private static final Logger logger = Logger.getLogger(PoloPage.class.getName());
+    private static final Logger logger = Logger.getLogger( PoloDoorsPage.class.getName());
 
     @FXML
     private ListView listView;

@@ -4,9 +4,9 @@ import java.util.Map;
 
 public class BQWindow {
     private String windowName;
-    private Map<String, Long> materialNameAndQuantity;
+    private Map<String, Integer> materialNameAndQuantity;
 
-    public BQWindow(String windowName, Map<String, Long> materialNameAndQuantity) {
+    public BQWindow( String windowName, Map<String, Integer> materialNameAndQuantity) {
         this.windowName = windowName;
         this.materialNameAndQuantity = materialNameAndQuantity;
     }
@@ -15,7 +15,7 @@ public class BQWindow {
         return windowName;
     }
 
-    public Map<String, Long> getMaterialNameAndQuantity() {
+    public Map<String, Integer> getMaterialNameAndQuantity() {
         return materialNameAndQuantity;
     }
 

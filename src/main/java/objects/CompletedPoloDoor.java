@@ -5,11 +5,17 @@ import java.time.LocalDate;
 public class CompletedPoloDoor extends Door{
 
     private LocalDate date;
-    private long quantity;
+    private int quantity;
 
-    public CompletedPoloDoor( String doorName, String date, long quantity ) {
+    public CompletedPoloDoor( String doorName, String date, Integer quantity ) {
         super( doorName );
         this.date = LocalDate.parse( date );
+        this.quantity = quantity;
+    }
+
+    public CompletedPoloDoor( String doorName, LocalDate date, Integer quantity ) {
+        super( doorName );
+        this.date = date;
         this.quantity = quantity;
     }
 
@@ -17,7 +23,7 @@ public class CompletedPoloDoor extends Door{
         return date;
     }
 
-    public long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 

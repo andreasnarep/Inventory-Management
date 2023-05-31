@@ -11,21 +11,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.DataManager;
-import objects.BQDoor;
-import objects.CompletedBQDoor;
+import objects.CompletedPoloDoor;
+import objects.PoloDoor;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BQDoorsPage implements Initializable {
+public class PoloDoorsPage implements Initializable {
 
-    private static final Logger logger = Logger.getLogger(BQDoorsPage.class.getName());
+    private static final Logger logger = Logger.getLogger( PoloDoorsPage.class.getName());
 
     @FXML
     private ChoiceBox<String> doorChoice;
@@ -33,21 +32,23 @@ public class BQDoorsPage implements Initializable {
     @FXML
     private Spinner<Integer> quantity;
 
-    @FXML
-    private TableView<CompletedBQDoor> table;
 
     @FXML
-    private TableColumn<CompletedBQDoor, String> nameColumn;
+    private TableView<CompletedPoloDoor> table;
 
     @FXML
-    private TableColumn<CompletedBQDoor, Integer> quantityColumn;
+    private TableColumn<CompletedPoloDoor, String> nameColumn;
+
+    @FXML
+    private TableColumn<CompletedPoloDoor, Integer> quantityColumn;
+
 
     @Override
     public void initialize( URL url, ResourceBundle resourceBundle ) {
-        BQDoor[] doors = DataManager.getBqDoors();
+        PoloDoor[] doors = DataManager.getPoloDoors();
         List<String> list = new ArrayList<>();
 
-        for (BQDoor door : doors)
+        for (PoloDoor door : doors)
             list.add( door.getDoorName() );
 
         doorChoice.setValue( list.get( 0 ) );
@@ -59,8 +60,8 @@ public class BQDoorsPage implements Initializable {
     }
 
     @FXML
-    public void insertButtonPressed(ActionEvent event) { //TODO Add handling for exceptions (e.g 0 entered as quantity).
-        CompletedBQDoor door = new CompletedBQDoor( doorChoice.getSelectionModel().getSelectedItem(), LocalDate.now(), quantity.getValue() );
+    public void insertButtonPressed(ActionEvent event) {//TODO Add handling for exceptions (e.g 0 entered as quantity).
+        CompletedPoloDoor door = new CompletedPoloDoor( doorChoice.getSelectionModel().getSelectedItem(), LocalDate.now(), quantity.getValue() );
         table.getItems().add( door );
         logger.log(Level.INFO, "DATA INSERTED: " + doorChoice.getSelectionModel().getSelectedItem() + " - " + quantity.getValue());
     }

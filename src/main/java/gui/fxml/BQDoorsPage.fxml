@@ -9,7 +9,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
 <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.BQDoorsPage">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.BQDoorsPage" userData="#fillData">
     <center>
         <GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                   prefHeight="100.0" prefWidth="316.0" vgap="5.0">
@@ -25,9 +25,9 @@
             <children>
                 <Label prefHeight="18.0" prefWidth="159.0" text="Valige valmistatud BQ uks:" textAlignment="RIGHT"/>
                 <Label text="Sisestage valmistatud kogus:" GridPane.rowIndex="1"/>
-                <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1"/>
+                <ChoiceBox fx:id="doorChoice" prefWidth="150.0" GridPane.columnIndex="1"/>
                 <Button onAction="#insertButtonPressed" mnemonicParsing="false" text="Sisesta" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                <Spinner editable="true" prefHeight="26.0" prefWidth="66.0" GridPane.columnIndex="1"
+                <Spinner fx:id="quantity" editable="true" prefHeight="26.0" prefWidth="66.0" GridPane.columnIndex="1"
                          GridPane.rowIndex="1">
                     <valueFactory>
                         <SpinnerValueFactory.IntegerSpinnerValueFactory max="1000" min="0"/>
@@ -37,10 +37,10 @@
         </GridPane>
     </center>
     <right>
-        <TableView prefHeight="357.0" prefWidth="246.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="table" prefHeight="357.0" prefWidth="246.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn prefWidth="156.40003049373627" text="Valmistatud BQ uksed"/>
-                <TableColumn prefWidth="88.39996337890625" text="Kogus"/>
+                <TableColumn fx:id="nameColumn" prefWidth="156.40003049373627" text="Valmistatud BQ uksed"/>
+                <TableColumn fx:id="quantityColumn" prefWidth="88.39996337890625" text="Kogus"/>
             </columns>
             <BorderPane.margin>
                 <Insets left="5.0" right="5.0" top="5.0"/>
