@@ -24,7 +24,7 @@
         </Tab>
         <Tab text="Polo uksed">
             <content>
-                <fx:include fx:id="poloPage" source="PoloPage.fxml"/>
+                <fx:include fx:id="poloPage" source="PoloDoorsPage.fxml"/>
             </content>
         </Tab>
         <Tab text="Ladu">

@@ -27,7 +27,7 @@
                 <Spinner fx:id="quantity" editable="true" prefHeight="26.0" prefWidth="66.0" GridPane.columnIndex="1"
                          GridPane.rowIndex="1">
                     <valueFactory>
-                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="1000" min="0"/>
+                        <SpinnerValueFactory.IntegerSpinnerValueFactory max="10000" min="1"/>
                     </valueFactory>
                 </Spinner>
             </children>

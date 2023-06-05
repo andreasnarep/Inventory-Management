@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.DataManager;
 import main.Logic;
 
 import java.io.File;
@@ -21,7 +22,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Logic.start();
+        //Logic.start();
+        DataManager.start();
         URL url = new File("src/main/java/gui/fxml/Tabs.fxml").toURI().toURL();
         //Parent root = FXMLLoader.load(getClass().getResource("../../resources/fxml/example.fxml"));
         Parent root = FXMLLoader.load(url);

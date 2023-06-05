@@ -13,13 +13,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import main.DataManager;
 import objects.BQDoor;
 import objects.CompletedBQDoor;
+import objects.CompletedPoloDoor;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,11 +42,9 @@ public class BQDoorsPage implements Initializable {
 
     @Override
     public void initialize( URL url, ResourceBundle resourceBundle ) {
-        BQDoor[] doors = DataManager.getBqDoors();
-        List<String> list = new ArrayList<>();
+        HashMap<String, BQDoor> doors = DataManager.getBqDoors();
 
-        for (BQDoor door : doors)
-            list.add( door.getDoorName() );
+        List<String> list = new ArrayList<>( doors.keySet() );
 
         doorChoice.setValue( list.get( 0 ) );
         ObservableList<String> observableList = FXCollections.observableList( list );
@@ -59,19 +55,29 @@ public class BQDoorsPage implements Initializable {
     }
 
     @FXML
-    public void insertButtonPressed(ActionEvent event) { //TODO Add handling for exceptions (e.g 0 entered as quantity).
+    public void insertButtonPressed(ActionEvent event) {
         CompletedBQDoor door = new CompletedBQDoor( doorChoice.getSelectionModel().getSelectedItem(), LocalDate.now(), quantity.getValue() );
+        DataManager.addCompletedBQDoor( door );
         table.getItems().add( door );
+        quantity.getValueFactory().setValue( 1 );
         logger.log(Level.INFO, "DATA INSERTED: " + doorChoice.getSelectionModel().getSelectedItem() + " - " + quantity.getValue());
     }
 
     @FXML
     public void confirmInsertedData(ActionEvent event) {
+        DataManager.confirmCompletedBQDoors();
+        table.getItems().clear();
         logger.log(Level.INFO, "INSERTED DATA CONFIRMED");
     }
 
     @FXML
     public void rollbackInsertedData(ActionEvent event) {
-        logger.log(Level.INFO, "DATA ROLLBACK");
+        try {
+            CompletedBQDoor removed = DataManager.rollbackCompletedBQDoor();
+            table.getItems().remove( removed );
+            logger.log(Level.INFO, "DATA ROLLBACK: " + removed);
+        } catch ( NoSuchElementException e ) {
+            logger.log(Level.WARNING, "CURRENT BQ DOORS SESSION HOLDS NO DATA");
+        }
     }
 }

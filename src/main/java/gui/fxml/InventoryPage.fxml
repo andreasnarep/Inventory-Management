@@ -6,33 +6,40 @@
 
 <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.InventoryPage">
     <top>
-        <TitledPane collapsible="true" layoutX="-1.0" prefHeight="225.0" prefWidth="300.0" text="Ladu">
+        <Button onMouseClicked="#refreshTables" mnemonicParsing="false" text="Värskenda tabeleid" BorderPane.alignment="CENTER">
             <font>
-                <Font name="Times New Roman" size="16.0" />
+                <Font size="14.0" />
             </font>
-            <content>
-                <TableView prefHeight="200.0" prefWidth="300.0">
-                    <columns>
-                        <TableColumn prefWidth="379.80001221895236" text="Materjal" />
-                        <TableColumn prefWidth="218.39999999999998" text="Kogus" />
-                    </columns>
-                </TableView>
-            </content>
-        </TitledPane>
+        </Button>
     </top>
     <center>
-        <TitledPane collapsible="true" layoutX="-1.0" layoutY="196.0" prefHeight="225.0" prefWidth="300.0" text="Otsakorral olev materjal" textFill="#b80000">
+        <TitledPane collapsible="true" prefHeight="225.0" prefWidth="300.0" text="Ladu" BorderPane.alignment="CENTER">
             <font>
                 <Font name="Times New Roman" size="16.0" />
             </font>
             <content>
-                <TableView prefHeight="200.0" prefWidth="300.0">
+                <TableView fx:id="inventoryTable" prefHeight="200.0" prefWidth="300.0">
                     <columns>
-                        <TableColumn prefWidth="379.80001221895236" text="Materjal" />
-                        <TableColumn prefWidth="218.39999999999998" text="Kogus" />
+                        <TableColumn fx:id="inventoryTableNameColumn" prefWidth="379.80001221895236" text="Materjal" />
+                        <TableColumn fx:id="inventoryTableQuantityColumn" prefWidth="218.39999999999998" text="Kogus" />
                     </columns>
                 </TableView>
             </content>
         </TitledPane>
     </center>
+    <bottom>
+        <TitledPane collapsible="true" prefHeight="225.0" prefWidth="300.0" text="Otsakorral olev materjal" textFill="#b80000" BorderPane.alignment="CENTER">
+           <font>
+                <Font name="Times New Roman" size="16.0" />
+            </font>
+           <content>
+                <TableView fx:id="lowInventoryTable" prefHeight="200.0" prefWidth="300.0">
+                    <columns>
+                        <TableColumn fx:id="lowInventoryTableNameColumn" prefWidth="379.80001221895236" text="Materjal" />
+                        <TableColumn fx:id="lowInventoryTableQuantityColumn" prefWidth="218.39999999999998" text="Kogus" />
+                    </columns>
+                </TableView>
+            </content>
+       </TitledPane>
+    </bottom>
 </BorderPane>

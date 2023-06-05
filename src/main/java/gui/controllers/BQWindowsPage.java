@@ -11,16 +11,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.DataManager;
-import objects.BQDoor;
-import objects.BQWindow;
-import objects.CompletedBQDoor;
-import objects.CompletedBQWindow;
+import objects.*;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,11 +40,9 @@ public class BQWindowsPage implements Initializable {
 
     @Override
     public void initialize( URL url, ResourceBundle resourceBundle ) {
-        BQWindow[] windows = DataManager.getBqWindows();
-        List<String> list = new ArrayList<>();
+        HashMap<String, BQWindow> windows = DataManager.getBqWindows();
 
-        for (BQWindow window : windows)
-            list.add( window.getWindowName() );
+        List<String> list = new ArrayList<>( windows.keySet() );
 
         windowChoice.setValue( list.get( 0 ) );
         ObservableList<String> observableList = FXCollections.observableList( list );
@@ -60,19 +53,29 @@ public class BQWindowsPage implements Initializable {
     }
 
     @FXML
-    public void insertButtonPressed(ActionEvent event) { //TODO Add handling for exceptions (e.g 0 entered as quantity).
+    public void insertButtonPressed(ActionEvent event) {
         CompletedBQWindow window = new CompletedBQWindow( windowChoice.getSelectionModel().getSelectedItem(), LocalDate.now(), quantity.getValue() );
+        DataManager.addCompletedBQWindow( window );
         table.getItems().add( window );
+        quantity.getValueFactory().setValue( 1 );
         logger.log(Level.INFO, "DATA INSERTED: " + windowChoice.getSelectionModel().getSelectedItem() + " - " + quantity.getValue());
     }
 
     @FXML
     public void confirmInsertedData(ActionEvent event) {
+        DataManager.confirmCompletedBQWindows();
+        table.getItems().clear();
         logger.log(Level.INFO, "INSERTED DATA CONFIRMED");
     }
 
     @FXML
     public void rollbackInsertedData(ActionEvent event) {
-        logger.log(Level.INFO, "DATA ROLLBACK");
+        try {
+            CompletedBQWindow removed = DataManager.rollbackCompletedBQWindow();
+            table.getItems().remove( removed );
+            logger.log(Level.INFO, "DATA ROLLBACK: " + removed);
+        } catch ( NoSuchElementException e ) {
+            logger.log(Level.WARNING, "CURRENT BQ WINDOWS SESSION HOLDS NO DATA");
+        }
     }
 }

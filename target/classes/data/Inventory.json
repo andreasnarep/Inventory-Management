@@ -1,13 +1,28 @@
 [
   {
     "name": "605x1537",
-    "quantity": 20,
+    "quantity": 15,
     "lowerLimit": 5
   },
   {
     "name": "asd",
     "quantity": 40,
-    "lowerLimit": 5
+    "lowerLimit": 8
+  },
+  {
+    "name": "545x775",
+    "quantity": 30,
+    "lowerLimit": 7
+  },
+  {
+    "name": "495x775",
+    "quantity": 30,
+    "lowerLimit": 7
+  },
+  {
+    "name": "605x1685",
+    "quantity": 30,
+    "lowerLimit": 7
   },
   {
     "name": "bgd",

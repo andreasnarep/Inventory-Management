@@ -12,6 +12,19 @@ public class Material {
         this.lowerLimit = lowerLimit;
     }
 
+    public Material( String name, int quantity ) {
+        this.name = name;
+        this.quantity = quantity;
+    }
+
+    public boolean isLow() {
+        return quantity <= lowerLimit;
+    }
+
+    public void setQuantity( int quantity ) {
+        this.quantity = quantity;
+    }
+
     public String getName() {
         return name;
     }
@@ -20,9 +33,8 @@ public class Material {
         return quantity;
     }
 
-    public Material( String name, int quantity ) {
-        this.name = name;
-        this.quantity = quantity;
+    public int getLowerLimit() {
+        return lowerLimit;
     }
 
     @Override

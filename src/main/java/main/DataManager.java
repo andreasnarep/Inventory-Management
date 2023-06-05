@@ -1,5 +1,6 @@
 package main;
 
+import javafx.collections.FXCollections;
 import objects.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,10 +10,8 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DataManager {
@@ -22,31 +21,38 @@ public class DataManager {
             "Orders.json", "PoloDoors.json", "CompletedBQDoors.json",
             "CompletedBQWindows.json", "CompletedPoloDoors.json"};
 
-    private static PoloDoor[] poloDoors;
-    private static BQDoor[] bqDoors;
-    private static BQWindow[] bqWindows;
-    private static Material[] inventory;
-    private static CompletedPoloDoor[] completedPoloDoors; //TODO Convert to List.
-    private static List<CompletedPoloDoor> completedPoloDoorsSession; //When completed doors are confirmed, this is
-                                                                      //emptied and these doors are added to completedPoloDoors.
-    private static CompletedBQDoor[] completedBQDoors; //TODO Convert to List.
-    private static List<CompletedBQDoor> completedBQDoorsSession;     //When completed doors are confirmed, this is
-                                                                      //emptied and these doors are added to completedBQDoors.
-    private static CompletedBQWindow[] completedBQWindows; //TODO Convert to List.
-    private static List<CompletedBQWindow> completedBQWindowsSession; //When completed windows are confirmed, this is
-                                                                      //emptied and these windows are added to completedBQWindows.
-    private static Order[] orders;
-    private DataReader dataReader;
+    private static HashMap<String, PoloDoor> poloDoors;
+    private static HashMap<String, BQDoor> bqDoors;
+    private static HashMap<String, BQWindow> bqWindows;
+    private static HashMap<String, Material> inventory;
+    private static List<Order> orders;
+    private static DataReader dataReader = new DataReader();
+    private static List<Material> lowerLimitInventory = new ArrayList<>();
+    private static List<CompletedPoloDoor> completedPoloDoors;
+    private static List<CompletedPoloDoor> completedPoloDoorsSession = new ArrayList<>(); //When completed doors are confirmed, this is
+    //emptied and these doors are added to completedPoloDoors.
+    private static List<CompletedBQDoor> completedBQDoors;
+    private static List<CompletedBQDoor> completedBQDoorsSession = new ArrayList<>();     //When completed doors are confirmed, this is
+    //emptied and these doors are added to completedBQDoors.
+    private static List<CompletedBQWindow> completedBQWindows;
+    private static List<CompletedBQWindow> completedBQWindowsSession = new ArrayList<>(); //When completed windows are confirmed, this is
+    //emptied and these windows are added to completedBQWindows.
 
     DataManager() {
-        this.dataReader = new DataReader();
-        completedBQDoorsSession = new ArrayList<>();
-        completedBQWindowsSession = new ArrayList<>();
-        completedPoloDoorsSession = new ArrayList<>();
+
+    }
+
+    public static void start() throws IOException, ParseException {
+        try {
+            readData();
+            logger.log( Level.INFO, "All of  the data read succesfully." );
+        } catch ( FileNotFoundException e ) {
+            logger.log( Level.WARNING, "File not found: " + e.getMessage() );
+        }
     }
 
 
-    public void readData() throws IOException, ParseException {
+    public static void readData() throws IOException, ParseException {
 
         for ( String file : filesToRead ) {
             switch ( file ) {
@@ -61,6 +67,7 @@ public class DataManager {
                     break;
                 case "Inventory.json":
                     inventory = dataReader.readInventory();
+                    createLowerLimitInventory();
                     break;
                 case "CompletedPoloDoors.json":
                     completedPoloDoors = dataReader.readCompletedPoloDoors();
@@ -75,16 +82,16 @@ public class DataManager {
                     orders = dataReader.readOrders();
                     break;
                 default:
-                    throw new FileNotFoundException(file);
+                    throw new FileNotFoundException( file );
             }
         }
 
         System.out.println( "----------------" );
-        for ( BQDoor door : bqDoors )
-            System.out.println( door );
+        for ( String door : bqDoors.keySet() )
+            System.out.println( bqDoors.get( door ) );
 
         System.out.println( "----------------" );
-        for ( Material material : inventory )
+        for ( String material : inventory.keySet() )
             System.out.println( material );
 
         System.out.println( "----------------" );
@@ -102,50 +109,220 @@ public class DataManager {
         System.out.println( "----------------" );
         for ( Order order : orders )
             System.out.println( order );
+
+        System.out.println( "----------------" );
+        for ( Material material : lowerLimitInventory )
+            System.out.println( material );
     }
 
-    public static BQDoor[] getBqDoors() {
+    public static void createLowerLimitInventory() {
+        lowerLimitInventory.clear();
+        for ( String key : inventory.keySet() ) {
+            Material material = inventory.get( key );
+            if ( material.isLow() ) {
+                lowerLimitInventory.add( material );
+            }
+        }
+    }
+
+    public static void addCompletedPoloDoor( CompletedPoloDoor completedPoloDoor ) {
+        completedPoloDoorsSession.add( completedPoloDoor );
+    }
+
+    public static void addCompletedBQDoor( CompletedBQDoor completedBQDoor ) {
+        completedBQDoorsSession.add( completedBQDoor );
+    }
+
+    public static void addCompletedBQWindow( CompletedBQWindow completedBQWindow ) {
+        completedBQWindowsSession.add( completedBQWindow );
+    }
+
+    public static void confirmCompletedPoloDoors() {
+        if ( completedPoloDoorsSession.size() != 0 ) {
+            for ( CompletedPoloDoor completedDoor : completedPoloDoorsSession ) {
+                PoloDoor door = poloDoors.get( completedDoor.getDoorName() );
+                Map<String, Integer> materialNameAndQuantity = door.getMaterialNameAndQuantity();
+
+                for ( String key : materialNameAndQuantity.keySet() ) {
+                    Material inventoryMaterial = inventory.get( key );
+                    int toSubtract = materialNameAndQuantity.get( key ) * completedDoor.getQuantity();
+                    int subtractFrom = inventoryMaterial.getQuantity();
+                    inventoryMaterial.setQuantity( subtractFrom - toSubtract );
+
+                    System.out.println(inventoryMaterial);
+                }
+            }
+            completedPoloDoors.addAll( FXCollections.observableArrayList( completedPoloDoorsSession ) );
+            completedPoloDoorsSession.clear();
+        }
+    }
+
+    public static void confirmCompletedBQDoors() {
+        if ( completedBQDoorsSession.size() != 0 ) {
+            for ( CompletedBQDoor completedDoor : completedBQDoorsSession ) {
+                BQDoor door = bqDoors.get( completedDoor.getDoorName() );
+                Map<String, Integer> materialNameAndQuantity = door.getMaterialNameAndQuantity();
+
+                for ( String key : materialNameAndQuantity.keySet() ) {
+                    Material inventoryMaterial = inventory.get( key );
+                    int toSubtract = materialNameAndQuantity.get( key ) * completedDoor.getQuantity();
+                    int subtractFrom = inventoryMaterial.getQuantity();
+                    inventoryMaterial.setQuantity( subtractFrom - toSubtract );
+
+                    System.out.println(inventoryMaterial);
+                }
+            }
+            completedBQDoors.addAll( FXCollections.observableArrayList( completedBQDoorsSession ) );
+            completedBQDoorsSession.clear();
+        }
+    }
+
+    public static void confirmCompletedBQWindows() {
+        if ( completedBQWindowsSession.size() != 0 ) {
+            for ( CompletedBQWindow completedWindow : completedBQWindowsSession ) {
+                BQWindow window = bqWindows.get( completedWindow.getWindowName() );
+                Map<String, Integer> materialNameAndQuantity = window.getMaterialNameAndQuantity();
+
+                for ( String key : materialNameAndQuantity.keySet() ) {
+                    Material inventoryMaterial = inventory.get( key );
+                    int toSubtract = materialNameAndQuantity.get( key ) * completedWindow.getQuantity();
+                    int subtractFrom = inventoryMaterial.getQuantity();
+                    inventoryMaterial.setQuantity( subtractFrom - toSubtract );
+
+                    System.out.println(inventoryMaterial);
+                }
+            }
+            completedBQWindows.addAll( FXCollections.observableArrayList( completedBQWindowsSession ) );
+            completedBQWindowsSession.clear();
+        }
+    }
+
+    public static CompletedPoloDoor rollbackCompletedPoloDoor() {
+        if ( completedPoloDoorsSession.size() != 0 ) {
+            return completedPoloDoorsSession.remove( completedPoloDoorsSession.size() - 1 );
+        }
+        throw new NoSuchElementException();
+    }
+
+    public static CompletedBQDoor rollbackCompletedBQDoor() {
+        if ( completedBQDoorsSession.size() != 0 ) {
+            return completedBQDoorsSession.remove( completedBQDoorsSession.size() - 1 );
+        }
+        throw new NoSuchElementException();
+    }
+
+    public static CompletedBQWindow rollbackCompletedBQWindow() {
+        if ( completedBQWindowsSession.size() != 0 ) {
+            return completedBQWindowsSession.remove( completedBQWindowsSession.size() - 1 );
+        }
+        throw new NoSuchElementException();
+    }
+
+    public static void setPoloDoors( HashMap<String, PoloDoor> poloDoors ) {
+        DataManager.poloDoors = poloDoors;
+    }
+
+    public static void setBqDoors( HashMap<String, BQDoor> bqDoors ) {
+        DataManager.bqDoors = bqDoors;
+    }
+
+    public static void setBqWindows( HashMap<String, BQWindow> bqWindows ) {
+        DataManager.bqWindows = bqWindows;
+    }
+
+    public static void setInventory( HashMap<String, Material> inventory ) {
+        DataManager.inventory = inventory;
+    }
+
+    public static void setOrders( List<Order> orders ) {
+        DataManager.orders = orders;
+    }
+
+    public static void setLowerLimitInventory( List<Material> lowerLimitInventory ) {
+        DataManager.lowerLimitInventory = lowerLimitInventory;
+    }
+
+    public static void setCompletedPoloDoors( List<CompletedPoloDoor> completedPoloDoors ) {
+        DataManager.completedPoloDoors = completedPoloDoors;
+    }
+
+    public static void setCompletedPoloDoorsSession( List<CompletedPoloDoor> completedPoloDoorsSession ) {
+        DataManager.completedPoloDoorsSession = completedPoloDoorsSession;
+    }
+
+    public static void setCompletedBQDoors( List<CompletedBQDoor> completedBQDoors ) {
+        DataManager.completedBQDoors = completedBQDoors;
+    }
+
+    public static void setCompletedBQDoorsSession( List<CompletedBQDoor> completedBQDoorsSession ) {
+        DataManager.completedBQDoorsSession = completedBQDoorsSession;
+    }
+
+    public static void setCompletedBQWindows( List<CompletedBQWindow> completedBQWindows ) {
+        DataManager.completedBQWindows = completedBQWindows;
+    }
+
+    public static void setCompletedBQWindowsSession( List<CompletedBQWindow> completedBQWindowsSession ) {
+        DataManager.completedBQWindowsSession = completedBQWindowsSession;
+    }
+
+    public static List<Material> getLowerLimitInventory() {
+        return lowerLimitInventory;
+    }
+
+    public static HashMap<String, BQDoor> getBqDoors() {
         return bqDoors;
     }
 
-    public static PoloDoor[] getPoloDoors() {
+    public static HashMap<String, PoloDoor> getPoloDoors() {
         return poloDoors;
     }
 
-    public static BQWindow[] getBqWindows() {
+    public static HashMap<String, BQWindow> getBqWindows() {
         return bqWindows;
     }
 
-    public static Material[] getInventory() {
+    public static HashMap<String, Material> getInventory() {
         return inventory;
     }
 
-    public static CompletedPoloDoor[] getCompletedPoloDoors() {
+    public static List<CompletedPoloDoor> getCompletedPoloDoors() {
         return completedPoloDoors;
     }
 
-    public static CompletedBQDoor[] getCompletedBQDoors() {
+    public static List<CompletedBQDoor> getCompletedBQDoors() {
         return completedBQDoors;
     }
 
-    public static CompletedBQWindow[] getCompletedBQWindows() {
+    public static List<CompletedBQWindow> getCompletedBQWindows() {
         return completedBQWindows;
     }
 
-    public static Order[] getOrders() {
+    public static List<CompletedPoloDoor> getCompletedPoloDoorsSession() {
+        return completedPoloDoorsSession;
+    }
+
+    public static List<CompletedBQDoor> getCompletedBQDoorsSession() {
+        return completedBQDoorsSession;
+    }
+
+    public static List<CompletedBQWindow> getCompletedBQWindowsSession() {
+        return completedBQWindowsSession;
+    }
+
+    public static List<Order> getOrders() {
         return orders;
     }
 }
 
 class DataReader {
-    protected BQDoor[] readBQDoors() throws IOException, ParseException {
+    protected HashMap<String, BQDoor> readBQDoors() throws IOException, ParseException {
         String filePath = "src/main/resources/data/BQDoors.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        BQDoor[] doors = new BQDoor[jsonArray.size()];
-        int i = 0;
+        HashMap<String, BQDoor> doors = new HashMap<>( jsonArray.size() );
 
         for ( Object object : jsonArray.toArray() ) {
             String doorName = (String) ( (JSONObject) object ).get( "name" );
@@ -157,22 +334,20 @@ class DataReader {
                 materialsMap.put( (String) key, quantity.intValue() );
             }
 
-            doors[i] = new BQDoor( doorName, materialsMap );
-            i++;
+            doors.put( doorName, new BQDoor( doorName, materialsMap ) );
         }
 
         fileReader.close();
         return doors;
     }
 
-    protected PoloDoor[] readPoloDoors() throws IOException, ParseException {
+    protected HashMap<String, PoloDoor> readPoloDoors() throws IOException, ParseException {
         String filePath = "src/main/resources/data/PoloDoors.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        PoloDoor[] doors = new PoloDoor[jsonArray.size()];
-        int i = 0;
+        HashMap<String, PoloDoor> doors = new HashMap<>( jsonArray.size() );
 
         for ( Object object : jsonArray.toArray() ) {
             String doorName = (String) ( (JSONObject) object ).get( "name" );
@@ -184,22 +359,20 @@ class DataReader {
                 materialsMap.put( (String) key, quantity.intValue() );
             }
 
-            doors[i] = new PoloDoor( doorName, materialsMap );
-            i++;
+            doors.put( doorName, new PoloDoor( doorName, materialsMap ) );
         }
 
         fileReader.close();
         return doors;
     }
 
-    protected BQWindow[] readBQWindows() throws IOException, ParseException {
+    protected HashMap<String, BQWindow> readBQWindows() throws IOException, ParseException {
         String filePath = "src/main/resources/data/BQWindows.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        BQWindow[] windows = new BQWindow[jsonArray.size()];
-        int i = 0;
+        HashMap<String, BQWindow> windows = new HashMap<>( jsonArray.size() );
 
         for ( Object object : jsonArray.toArray() ) {
             String windowName = (String) ( (JSONObject) object ).get( "name" );
@@ -211,128 +384,116 @@ class DataReader {
                 materialsMap.put( (String) key, quantity.intValue() );
             }
 
-            windows[i] = new BQWindow( windowName, materialsMap );
-            i++;
+            windows.put( windowName, new BQWindow( windowName, materialsMap ) );
         }
 
         fileReader.close();
         return windows;
     }
 
-    protected Material[] readInventory() throws IOException, ParseException {
+    protected HashMap<String, Material> readInventory() throws IOException, ParseException {
         String filePath = "src/main/resources/data/Inventory.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        Material[] inventory = new Material[jsonArray.size()];
-        int i = 0;
+        HashMap<String, Material> inventory = new HashMap<>( jsonArray.size() );
 
         for ( Object object : jsonArray.toArray() ) {
-            String windowName = (String) ( (JSONObject) object ).get( "name" );
+            String materialName = (String) ( (JSONObject) object ).get( "name" );
             Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
             Long lowerLimit = (Long) ( (JSONObject) object ).get( "lowerLimit" );
 
-            inventory[i] = new Material( windowName, quantity.intValue(), lowerLimit.intValue() );
-            i++;
+            inventory.put( materialName, new Material( materialName, quantity.intValue(), lowerLimit.intValue() ) );
         }
 
         fileReader.close();
         return inventory;
     }
 
-    protected CompletedPoloDoor[] readCompletedPoloDoors() throws IOException, ParseException {
+    protected List<CompletedPoloDoor> readCompletedPoloDoors() throws IOException, ParseException {
         String filePath = "src/main/resources/data/CompletedPoloDoors.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        CompletedPoloDoor[] doors = new CompletedPoloDoor[jsonArray.size()];
-        int i = 0;
+        List<CompletedPoloDoor> doors = new ArrayList<>( jsonArray.size() );
 
         for ( Object object : jsonArray.toArray() ) {
             String doorName = (String) ( (JSONObject) object ).get( "name" );
-            String date = (String) ( (JSONObject) object).get( "date" );
+            String date = (String) ( (JSONObject) object ).get( "date" );
             Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
 
-            doors[i] = new CompletedPoloDoor( doorName, date, quantity.intValue() );
-            i++;
+            doors.add( new CompletedPoloDoor( doorName, date, quantity.intValue() ) );
         }
 
         fileReader.close();
         return doors;
     }
 
-    protected CompletedBQDoor[] readCompletedBQDoors() throws IOException, ParseException {
+    protected List<CompletedBQDoor> readCompletedBQDoors() throws IOException, ParseException {
         String filePath = "src/main/resources/data/CompletedBQDoors.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        CompletedBQDoor[] doors = new CompletedBQDoor[jsonArray.size()];
-        int i = 0;
+        List<CompletedBQDoor> doors = new ArrayList<>( jsonArray.size() );
 
         for ( Object object : jsonArray.toArray() ) {
             String doorName = (String) ( (JSONObject) object ).get( "name" );
-            String date = (String) ( (JSONObject) object).get( "date" );
+            String date = (String) ( (JSONObject) object ).get( "date" );
             Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
-
-            doors[i] = new CompletedBQDoor( doorName, date, quantity.intValue() );
-            i++;
+            doors.add( new CompletedBQDoor( doorName, date, quantity.intValue() ) );
         }
 
         fileReader.close();
         return doors;
     }
 
-    protected CompletedBQWindow[] readCompletedBQWindows() throws IOException, ParseException {
+    protected List<CompletedBQWindow> readCompletedBQWindows() throws IOException, ParseException {
         String filePath = "src/main/resources/data/CompletedBQWindows.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        CompletedBQWindow[] doors = new CompletedBQWindow[jsonArray.size()];
-        int i = 0;
+        List<CompletedBQWindow> doors = new ArrayList<>( jsonArray.size() );
 
         for ( Object object : jsonArray.toArray() ) {
             String windowName = (String) ( (JSONObject) object ).get( "name" );
-            String date = (String) ( (JSONObject) object).get( "date" );
+            String date = (String) ( (JSONObject) object ).get( "date" );
             Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
 
-            doors[i] = new CompletedBQWindow( windowName, date, quantity.intValue() );
-            i++;
+            doors.add( new CompletedBQWindow( windowName, date, quantity.intValue() ) );
         }
 
         fileReader.close();
         return doors;
     }
 
-    protected Order[] readOrders() throws IOException, ParseException {
+    protected List<Order> readOrders() throws IOException, ParseException {
         String filePath = "src/main/resources/data/Orders.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        Order[] orders = new Order[jsonArray.size()];
-        int i = 0;
+        List<Order> orders = new ArrayList<>( jsonArray.size() );
 
         for ( Object object : jsonArray.toArray() ) {
             String orderName = (String) ( (JSONObject) object ).get( "name" );
-            String date = (String) ( (JSONObject) object).get( "date" );
+            String date = (String) ( (JSONObject) object ).get( "date" );
             Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
 
             JSONObject materialsJSONObject = (JSONObject) ( (JSONObject) object ).get( "components" );
             Material[] components = new Material[materialsJSONObject.keySet().size()];
-            int j = 0;
+            int i = 0;
 
             for ( Object key : materialsJSONObject.keySet() ) {
                 Long val = (Long) materialsJSONObject.get( key );
-                components[j] = new Material( (String) key, val.intValue() );
-                j++;
+                components[i] = new Material( (String) key, val.intValue() );
+                i++;
             }
 
-            orders[i] = new Order( orderName, date, quantity.intValue(),  components);
-            i++;
+            orders.add( new Order( orderName, date, quantity.intValue(), components ) );
         }
 
         fileReader.close();

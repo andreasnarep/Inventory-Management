@@ -16,9 +16,7 @@ import objects.PoloDoor;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,11 +43,9 @@ public class PoloDoorsPage implements Initializable {
 
     @Override
     public void initialize( URL url, ResourceBundle resourceBundle ) {
-        PoloDoor[] doors = DataManager.getPoloDoors();
-        List<String> list = new ArrayList<>();
+        HashMap<String, PoloDoor> doors = DataManager.getPoloDoors();
 
-        for (PoloDoor door : doors)
-            list.add( door.getDoorName() );
+        List<String> list = new ArrayList<>( doors.keySet() );
 
         doorChoice.setValue( list.get( 0 ) );
         ObservableList<String> observableList = FXCollections.observableList( list );
@@ -60,19 +56,29 @@ public class PoloDoorsPage implements Initializable {
     }
 
     @FXML
-    public void insertButtonPressed(ActionEvent event) {//TODO Add handling for exceptions (e.g 0 entered as quantity).
+    public void insertButtonPressed(ActionEvent event) {
         CompletedPoloDoor door = new CompletedPoloDoor( doorChoice.getSelectionModel().getSelectedItem(), LocalDate.now(), quantity.getValue() );
+        DataManager.addCompletedPoloDoor( door );
         table.getItems().add( door );
+        quantity.getValueFactory().setValue( 1 );
         logger.log(Level.INFO, "DATA INSERTED: " + doorChoice.getSelectionModel().getSelectedItem() + " - " + quantity.getValue());
     }
 
     @FXML
     public void confirmInsertedData(ActionEvent event) {
+        DataManager.confirmCompletedPoloDoors();
+        table.getItems().clear();
         logger.log(Level.INFO, "INSERTED DATA CONFIRMED");
     }
 
     @FXML
     public void rollbackInsertedData(ActionEvent event) {
-        logger.log(Level.INFO, "DATA ROLLBACK");
+        try {
+            CompletedPoloDoor removed = DataManager.rollbackCompletedPoloDoor();
+            table.getItems().remove( removed );
+            logger.log(Level.INFO, "DATA ROLLBACK: " + removed);
+        } catch ( NoSuchElementException e ) {
+            logger.log(Level.WARNING, "CURRENT POLO DOORS SESSION HOLDS NO DATA");
+        }
     }
 }
