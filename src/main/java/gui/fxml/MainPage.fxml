@@ -21,7 +21,7 @@
                 <RowConstraints maxHeight="40.39999999999999" minHeight="10.0" prefHeight="35.39999999999999" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="See kuu valmistatud" GridPane.columnIndex="1">
+                <Label fx:id="mainLabel" prefHeight="30.0" prefWidth="218.0" text="See kuu valmistatud" GridPane.columnIndex="1">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -31,7 +31,7 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Label text="Label" GridPane.rowIndex="2">
+                <Label fx:id="bqDoorsMonthlyCounter" text="Label" GridPane.rowIndex="2">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -41,7 +41,7 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Label fx:id="bqWindowsMonthlyCounter" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -51,12 +51,12 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Label fx:id="poloDoorsMonthlyCounter" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <ChoiceBox fx:id="months" prefWidth="150.0" value="Vali kuu" GridPane.columnIndex="2">
+                <ChoiceBox fx:id="months" prefHeight="25.0" prefWidth="86.0" value="Vali kuu" GridPane.columnIndex="2">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Jaanuar" />
@@ -100,7 +100,7 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Label text="5" GridPane.rowIndex="2">
+                <Label fx:id="bqDoorsAllTimeCounter" text="5" GridPane.rowIndex="2">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -110,7 +110,7 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Label text="12" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Label fx:id="bqWindowsAllTimeCounter" text="12" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -123,7 +123,7 @@
                         <Font size="18.0" />
                     </font>
                 </Label>
-                <Label text="25" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Label fx:id="poloDoorsAllTimeCounter" text="25" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <font>
                         <Font size="18.0" />
                     </font>

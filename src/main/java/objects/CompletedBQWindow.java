@@ -28,6 +28,10 @@ public class CompletedBQWindow {
         return windowName;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public String toString() {
         return "(COMPLETEDBQWINDOW) " + windowName + ", Date: " + date.toString() + ", Quantity: " + quantity;

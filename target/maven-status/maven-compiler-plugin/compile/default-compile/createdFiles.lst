@@ -11,6 +11,7 @@ objects\BQWindow.class
 objects\Material.class
 gui\controllers\BQDoorsPage.class
 objects\BQDoor.class
+gui\controllers\MainPage$1.class
 gui\controllers\MainPage.class
 objects\CompletedBQDoor.class
 objects\CompletedPoloDoor.class
