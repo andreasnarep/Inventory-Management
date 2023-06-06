@@ -66,6 +66,9 @@ public class MainPage implements Initializable {
             @Override
             public void changed( ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue ) {
                 setMainLabel( newValue.intValue() + 1 );
+                bqDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQDoors( newValue.intValue() + 1 ) ) );
+                bqWindowsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQWindows( newValue.intValue() + 1 ) ) );
+                poloDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyPoloDoors( newValue.intValue() + 1 ) ) );
             }
         } );
     }
