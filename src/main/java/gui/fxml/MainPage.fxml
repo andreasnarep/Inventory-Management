@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainPage">
+<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainPage">
     <top>
         <GridPane alignment="CENTER" prefHeight="122.0" prefWidth="600.0">
             <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="338.8" minWidth="10.0" prefWidth="257.8" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="352.4" minWidth="10.0" prefWidth="285.40000000000003" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="404.6" minWidth="10.0" prefWidth="256.6" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="53.6" minHeight="10.0" prefHeight="49.6" vgrow="SOMETIMES" />
@@ -21,7 +21,7 @@
                 <RowConstraints maxHeight="40.39999999999999" minHeight="10.0" prefHeight="35.39999999999999" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="mainLabel" prefHeight="30.0" prefWidth="218.0" text="See kuu valmistatud" GridPane.columnIndex="1">
+                <Label fx:id="mainLabel" prefHeight="30.0" prefWidth="257.0" GridPane.columnIndex="1">
                     <font>
                         <Font size="20.0" />
                     </font>
@@ -80,9 +80,9 @@
     <center>
         <GridPane alignment="CENTER" prefHeight="122.0" prefWidth="600.0">
             <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="338.8" minWidth="10.0" prefWidth="257.8" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="352.4" minWidth="10.0" prefWidth="285.40000000000003" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="404.6" minWidth="10.0" prefWidth="256.6" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="53.6" minHeight="10.0" prefHeight="49.6" vgrow="SOMETIMES" />

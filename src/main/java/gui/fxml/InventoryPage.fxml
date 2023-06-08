@@ -6,19 +6,22 @@
 
 <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.InventoryPage">
     <top>
-        <Button onMouseClicked="#refreshTables" mnemonicParsing="false" text="Värskenda tabeleid" BorderPane.alignment="CENTER">
+        <Button mnemonicParsing="false" onMouseClicked="#refreshTables" text="Värskenda tabeleid" BorderPane.alignment="CENTER">
             <font>
                 <Font size="14.0" />
             </font>
         </Button>
     </top>
     <center>
-        <TitledPane collapsible="true" prefHeight="225.0" prefWidth="300.0" text="Ladu" BorderPane.alignment="CENTER">
+        <TitledPane collapsible="true" prefHeight="10000.0" prefWidth="10000.0" text="Ladu" BorderPane.alignment="CENTER">
             <font>
                 <Font name="Times New Roman" size="16.0" />
             </font>
             <content>
-                <TableView fx:id="inventoryTable" prefHeight="200.0" prefWidth="300.0">
+                <TableView fx:id="inventoryTable" prefHeight="10000.0" prefWidth="10000.0">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
                     <columns>
                         <TableColumn fx:id="inventoryTableNameColumn" prefWidth="379.80001221895236" text="Materjal" />
                         <TableColumn fx:id="inventoryTableQuantityColumn" prefWidth="218.39999999999998" text="Kogus" />
@@ -28,12 +31,15 @@
         </TitledPane>
     </center>
     <bottom>
-        <TitledPane collapsible="true" prefHeight="225.0" prefWidth="300.0" text="Otsakorral olev materjal" textFill="#b80000" BorderPane.alignment="CENTER">
+        <TitledPane collapsible="true" prefHeight="182.0" prefWidth="600.0" text="Otsakorral olev materjal" textFill="#b80000" BorderPane.alignment="CENTER">
            <font>
                 <Font name="Times New Roman" size="16.0" />
             </font>
            <content>
-                <TableView fx:id="lowInventoryTable" prefHeight="200.0" prefWidth="300.0">
+                <TableView fx:id="lowInventoryTable" prefHeight="10000.0" prefWidth="10000.0">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
                     <columns>
                         <TableColumn fx:id="lowInventoryTableNameColumn" prefWidth="379.80001221895236" text="Materjal" />
                         <TableColumn fx:id="lowInventoryTableQuantityColumn" prefWidth="218.39999999999998" text="Kogus" />

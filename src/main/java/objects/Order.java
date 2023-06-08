@@ -6,14 +6,26 @@ public class Order {
 
     private String name;
     private LocalDate date;
-    private int quantity;
+
     private Material[] components;
 
-    public Order( String name, String date, int quantity, Material[] components) {
+    public Order( String name, LocalDate date, Material[] components ) {
         this.name = name;
-        this.quantity = quantity;
-        this.date = LocalDate.parse( date );
+        this.date = date;
         this.components = components;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+
+    public Material[] getComponents() {
+        return components;
     }
 
     @Override
@@ -23,10 +35,10 @@ public class Order {
         //System.out.println(components[0]);
 
         sb.append( "{" );
-        for (Material component : components)
+        for ( Material component : components )
             sb.append( component.getName() + " - " + component.getQuantity() + ", " );
         sb.append( "}" );
 
-        return "(ORDER) " + name + ", Date: " + date.toString() + ", Quantity: " + quantity + ", Components: " + sb.toString();
+        return "(ORDER) " + name + ", Date: " + date.toString() + ", Components: " + sb.toString();
     }
 }

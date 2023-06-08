@@ -1,12 +1,7 @@
 package gui.controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import main.DataManager;
@@ -16,10 +11,8 @@ import objects.CompletedPoloDoor;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainPage implements Initializable {
@@ -52,24 +45,23 @@ public class MainPage implements Initializable {
 
     @Override
     public void initialize( URL url, ResourceBundle resourceBundle ) {
-        setMainLabel( LocalDate.now().getMonthValue() );
+        LocalDate date = LocalDate.now();
 
-        bqDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQDoors( LocalDate.now().getMonthValue() ) ) );
-        bqWindowsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQWindows( LocalDate.now().getMonthValue() ) ) );
-        poloDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyPoloDoors( LocalDate.now().getMonthValue() ) ) );
+        setMainLabel( date.getMonthValue() );
+
+        bqDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQDoors( date.getMonthValue() ) ) );
+        bqWindowsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQWindows( date.getMonthValue() ) ) );
+        poloDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyPoloDoors( date.getMonthValue() ) ) );
 
         bqDoorsAllTimeCounter.setText( String.valueOf( calculateAllTimeBQDoors() ) );
         bqWindowsAllTimeCounter.setText( String.valueOf( calculateAllTimeBQWindows() ) );
         poloDoorsAllTimeCounter.setText( String.valueOf( calculateAllTimePoloDoors() ) );
 
-        months.getSelectionModel().selectedIndexProperty().addListener( new ChangeListener<Number>() {
-            @Override
-            public void changed( ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue ) {
-                setMainLabel( newValue.intValue() + 1 );
-                bqDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQDoors( newValue.intValue() + 1 ) ) );
-                bqWindowsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQWindows( newValue.intValue() + 1 ) ) );
-                poloDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyPoloDoors( newValue.intValue() + 1 ) ) );
-            }
+        months.getSelectionModel().selectedIndexProperty().addListener( ( observableValue, oldValue, newValue ) -> {
+            setMainLabel( newValue.intValue() + 1 );
+            bqDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQDoors( newValue.intValue() + 1 ) ) );
+            bqWindowsMonthlyCounter.setText( String.valueOf( calculateMonthlyBQWindows( newValue.intValue() + 1 ) ) );
+            poloDoorsMonthlyCounter.setText( String.valueOf( calculateMonthlyPoloDoors( newValue.intValue() + 1 ) ) );
         } );
     }
 

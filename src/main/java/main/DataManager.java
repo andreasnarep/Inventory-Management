@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,15 +20,20 @@ public class DataManager {
     private static final Logger logger = Logger.getLogger( DataManager.class.getName() );
     private static String[] filesToRead = {"BQDoors.json", "BQWindows.json", "Inventory.json",
             "Orders.json", "PoloDoors.json", "CompletedBQDoors.json",
-            "CompletedBQWindows.json", "CompletedPoloDoors.json"};
+            "CompletedBQWindows.json", "CompletedPoloDoors.json", "Glasses.json", "Boxes.json"};
 
     private static HashMap<String, PoloDoor> poloDoors;
     private static HashMap<String, BQDoor> bqDoors;
     private static HashMap<String, BQWindow> bqWindows;
+    private static List<String> glasses;
+    private static List<String> other; //Things to order
+    private static Map<String, Box> boxes;
     private static HashMap<String, Material> inventory;
-    private static List<Order> orders;
     private static DataReader dataReader = new DataReader();
     private static List<Material> lowerLimitInventory = new ArrayList<>();
+    private static List<Order> orders;
+    private static List<Material> orderSession = new ArrayList<>();//When order is confirmed, this is
+    //emptied and these components are added to the orders list as an order.
     private static List<CompletedPoloDoor> completedPoloDoors;
     private static List<CompletedPoloDoor> completedPoloDoorsSession = new ArrayList<>(); //When completed doors are confirmed, this is
     //emptied and these doors are added to completedPoloDoors.
@@ -81,6 +87,12 @@ public class DataManager {
                 case "Orders.json":
                     orders = dataReader.readOrders();
                     break;
+                case "Glasses.json":
+                    glasses = dataReader.readGlasses();
+                    break;
+                case "Boxes.json":
+                    boxes = dataReader.readBoxes();
+                    break;
                 default:
                     throw new FileNotFoundException( file );
             }
@@ -113,6 +125,14 @@ public class DataManager {
         System.out.println( "----------------" );
         for ( Material material : lowerLimitInventory )
             System.out.println( material );
+
+        System.out.println( "----------------" );
+        for ( String glass : glasses )
+            System.out.println( glass );
+
+        System.out.println( "----------------" );
+        for ( String key : boxes.keySet() )
+            System.out.println( boxes.get( key ) );
     }
 
     public static void createLowerLimitInventory() {
@@ -125,6 +145,10 @@ public class DataManager {
         }
     }
 
+    public static void addOrderComponent(Material component) {
+        orderSession.add( component );
+    }
+
     public static void addCompletedPoloDoor( CompletedPoloDoor completedPoloDoor ) {
         completedPoloDoorsSession.add( completedPoloDoor );
     }
@@ -135,6 +159,19 @@ public class DataManager {
 
     public static void addCompletedBQWindow( CompletedBQWindow completedBQWindow ) {
         completedBQWindowsSession.add( completedBQWindow );
+    }
+
+    public static Order addNewOrder() {
+        Material[] components = new Material[orderSession.size()];
+        components = orderSession.toArray(components);
+        String random = UUID.randomUUID().toString().substring( 0, 6 );
+
+        Order order = new Order( random, LocalDate.now(), components );
+        orderSession.clear();
+        orders.add( order );
+
+        logger.log( Level.INFO, "NEW ORDER: " + order );
+        return order;
     }
 
     public static void confirmCompletedPoloDoors() {
@@ -195,6 +232,14 @@ public class DataManager {
             completedBQWindows.addAll( FXCollections.observableArrayList( completedBQWindowsSession ) );
             completedBQWindowsSession.clear();
         }
+    }
+
+    public static Material rollbackOrderComponent() {
+        if (orderSession.size() != 0) {
+            return orderSession.remove( orderSession.size() - 1 );
+        }
+
+        throw new NoSuchElementException();
     }
 
     public static CompletedPoloDoor rollbackCompletedPoloDoor() {
@@ -313,6 +358,10 @@ public class DataManager {
     public static List<Order> getOrders() {
         return orders;
     }
+
+    public static List<String> getGlasses() { return glasses; }
+
+    public static Map<String, Box> getBoxes() { return boxes; }
 }
 
 class DataReader {
@@ -481,7 +530,6 @@ class DataReader {
         for ( Object object : jsonArray.toArray() ) {
             String orderName = (String) ( (JSONObject) object ).get( "name" );
             String date = (String) ( (JSONObject) object ).get( "date" );
-            Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
 
             JSONObject materialsJSONObject = (JSONObject) ( (JSONObject) object ).get( "components" );
             Material[] components = new Material[materialsJSONObject.keySet().size()];
@@ -493,10 +541,56 @@ class DataReader {
                 i++;
             }
 
-            orders.add( new Order( orderName, date, quantity.intValue(), components ) );
+            orders.add( new Order( orderName, LocalDate.parse(date), components ) );
         }
 
         fileReader.close();
         return orders;
+    }
+
+    public List<String> readGlasses() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/Glasses.json";
+        JSONParser jsonParser = new JSONParser();
+
+        FileReader fileReader = new FileReader( filePath );
+        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
+        List<String> glasses = new ArrayList<>( jsonArray.size() );
+
+        for ( Object object : jsonArray.toArray() ) {
+            String glassName = (String) ( (JSONObject) object ).get( "name" );
+            glasses.add( glassName );
+        }
+
+        fileReader.close();
+        return glasses;
+    }
+
+    public Map<String, Box> readBoxes() throws IOException, ParseException {
+        String filePath = "src/main/resources/data/Boxes.json";
+        JSONParser jsonParser = new JSONParser();
+
+        FileReader fileReader = new FileReader( filePath );
+        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
+        Map<String, Box> boxes = new HashMap<>(jsonArray.size());
+
+        for ( Object object : jsonArray.toArray() ) {
+            String boxName = (String) ( (JSONObject) object ).get( "name" );
+
+            JSONObject materialsJSONObject = (JSONObject) ( (JSONObject) object ).get( "components" );
+            Material[] components = new Material[materialsJSONObject.keySet().size()];
+            int i = 0;
+
+            for ( Object key : materialsJSONObject.keySet() ) {
+                Long val = (Long) materialsJSONObject.get( key );
+                components[i] = new Material( (String) key, val.intValue() );
+                i++;
+            }
+
+            Box box = new Box( boxName, components );
+            boxes.put( boxName,  box);
+        }
+
+        fileReader.close();
+        return boxes;
     }
 }

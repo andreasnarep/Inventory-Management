@@ -1,5 +1,6 @@
 import gui.controllers.MainPage;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -7,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.DataManager;
 import main.Logic;
 
@@ -33,7 +35,9 @@ public class Main extends Application {
         //Parent root = FXMLLoader.load(getClass().getResource("../../resources/fxml/example.fxml"));
         Parent root = FXMLLoader.load(url);
         primaryStage.setTitle("Varola");
-        primaryStage.setScene(new Scene(root, 600, 475));
+        primaryStage.setScene(new Scene(root, 700, 500));
+        primaryStage.setMinHeight( 487 );
+        primaryStage.setMinWidth( 668 );
         primaryStage.show();
         logger.log( Level.INFO, "GUI started succesfully." );
     }
