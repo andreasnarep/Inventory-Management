@@ -7,6 +7,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,6 +19,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DataManager {
+
+    private static String host="smtp.gmail.com";
+    private static String user="andreasnarep2@gmail.com";//change accordingly
+    private static String password="ifslypzmdwrpoktx";//change accordingly
+    private static String to="andreasnarep2@gmail.com";//change accordingly
+    private static Properties props;
+
 
     private static final Logger logger = Logger.getLogger( DataManager.class.getName() );
     private static String[] filesToRead = {"BQDoors.json", "BQWindows.json", "Inventory.json",
@@ -31,7 +41,7 @@ public class DataManager {
     private static HashMap<String, Material> inventory;
     private static DataReader dataReader = new DataReader();
     private static List<Material> lowerLimitInventory = new ArrayList<>();
-    private static List<Order> orders;
+    private static Map<String, Order> orders = new HashMap<>();
     private static List<Material> orderSession = new ArrayList<>();//When order is confirmed, this is
     //emptied and these components are added to the orders list as an order.
     private static List<CompletedPoloDoor> completedPoloDoors;
@@ -55,8 +65,21 @@ public class DataManager {
         } catch ( FileNotFoundException e ) {
             logger.log( Level.WARNING, "File not found: " + e.getMessage() );
         }
+        startMailService();
     }
 
+    private static void startMailService() {
+        host="smtp.gmail.com";
+        user="andreasnarep2@gmail.com";//change accordingly
+        password="ifslypzmdwrpoktx";//change accordingly
+        to="andreasnarep2@gmail.com";//change accordingly
+
+        props = new Properties();
+        props.put("mail.smtp.host",host);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.ssl.enable", "true");
+    }
 
     public static void readData() throws IOException, ParseException {
 
@@ -119,8 +142,8 @@ public class DataManager {
             System.out.println( window );
 
         System.out.println( "----------------" );
-        for ( Order order : orders )
-            System.out.println( order );
+        for ( String key : orders.keySet() )
+            System.out.println( orders.get( key ) );
 
         System.out.println( "----------------" );
         for ( Material material : lowerLimitInventory )
@@ -135,6 +158,39 @@ public class DataManager {
             System.out.println( boxes.get( key ) );
     }
 
+    public static void sendOrderByMail(Order order) {
+        Session session = Session.getDefaultInstance(props,
+                new Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(user,password);
+                    }
+                });
+
+        //Compose the message
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient( Message.RecipientType.TO,new InternetAddress(to));
+            message.setSubject("Tellimus - " + order.getName());
+
+            StringBuilder sb = new StringBuilder();
+            sb.append( "Tellimuse nimi - " ).append( order.getName() ).append( "\n\n" );
+            sb.append( "Tellitud asjad:");
+
+            for (Material material : order.getComponents()) {
+                sb.append( "\n\t" ).append( material.getName() ).append( " - " ).append( material.getQuantity() ).append( "tk" );
+            }
+
+            message.setText(sb.toString());
+
+            //send the message
+            Transport.send(message);
+
+            logger.log( Level.INFO, "message sent successfully...");
+
+        } catch ( MessagingException e) {e.printStackTrace();}
+    }
+
     public static void createLowerLimitInventory() {
         lowerLimitInventory.clear();
         for ( String key : inventory.keySet() ) {
@@ -147,6 +203,12 @@ public class DataManager {
 
     public static void addOrderComponent(Material component) {
         orderSession.add( component );
+    }
+
+    public static void addOrderComponent(Box component) {
+        for (Material item : component.getComponents()) {
+            addOrderComponent( item );
+        }
     }
 
     public static void addCompletedPoloDoor( CompletedPoloDoor completedPoloDoor ) {
@@ -164,11 +226,11 @@ public class DataManager {
     public static Order addNewOrder() {
         Material[] components = new Material[orderSession.size()];
         components = orderSession.toArray(components);
-        String random = UUID.randomUUID().toString().substring( 0, 6 );
+        String orderName = UUID.randomUUID().toString().substring( 0, 6 );
 
-        Order order = new Order( random, LocalDate.now(), components );
+        Order order = new Order( orderName, LocalDate.now(), components );
         orderSession.clear();
-        orders.add( order );
+        orders.put( orderName, order );
 
         logger.log( Level.INFO, "NEW ORDER: " + order );
         return order;
@@ -238,7 +300,6 @@ public class DataManager {
         if (orderSession.size() != 0) {
             return orderSession.remove( orderSession.size() - 1 );
         }
-
         throw new NoSuchElementException();
     }
 
@@ -279,7 +340,7 @@ public class DataManager {
         DataManager.inventory = inventory;
     }
 
-    public static void setOrders( List<Order> orders ) {
+    public static void setOrders( Map<String, Order> orders ) {
         DataManager.orders = orders;
     }
 
@@ -310,6 +371,8 @@ public class DataManager {
     public static void setCompletedBQWindowsSession( List<CompletedBQWindow> completedBQWindowsSession ) {
         DataManager.completedBQWindowsSession = completedBQWindowsSession;
     }
+
+
 
     public static List<Material> getLowerLimitInventory() {
         return lowerLimitInventory;
@@ -355,13 +418,17 @@ public class DataManager {
         return completedBQWindowsSession;
     }
 
-    public static List<Order> getOrders() {
+    public static Map<String, Order> getOrders() {
         return orders;
     }
 
     public static List<String> getGlasses() { return glasses; }
 
     public static Map<String, Box> getBoxes() { return boxes; }
+
+    public static List<Material> getOrderSession() {
+        return orderSession;
+    }
 }
 
 class DataReader {
@@ -519,13 +586,13 @@ class DataReader {
         return doors;
     }
 
-    protected List<Order> readOrders() throws IOException, ParseException {
+    protected Map<String, Order> readOrders() throws IOException, ParseException {
         String filePath = "src/main/resources/data/Orders.json";
         JSONParser jsonParser = new JSONParser();
 
         FileReader fileReader = new FileReader( filePath );
         JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        List<Order> orders = new ArrayList<>( jsonArray.size() );
+        Map<String, Order> orders = new HashMap<>(jsonArray.size());
 
         for ( Object object : jsonArray.toArray() ) {
             String orderName = (String) ( (JSONObject) object ).get( "name" );
@@ -541,7 +608,7 @@ class DataReader {
                 i++;
             }
 
-            orders.add( new Order( orderName, LocalDate.parse(date), components ) );
+            orders.put( orderName, new Order( orderName, LocalDate.parse(date), components ) );
         }
 
         fileReader.close();

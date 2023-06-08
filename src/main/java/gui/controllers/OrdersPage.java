@@ -1,7 +1,6 @@
 package gui.controllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,7 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import main.DataManager;
-import objects.BQWindow;
 import objects.Box;
 import objects.Material;
 import objects.Order;
@@ -30,28 +28,10 @@ public class OrdersPage implements Initializable {
     private ListView<String> orders;
 
     @FXML
-    private Button addNewOrder;
-
-    @FXML
     private Spinner<Integer> quantity;
 
     @FXML
-    private Button confirmOrder;
-
-    @FXML
-    private Button glassesChoice;
-
-    @FXML
-    private Button boxesChoice;
-
-    @FXML
-    private Button otherChoice;
-
-    @FXML
-    private ChoiceBox<Order> orderArrivedChoice;
-
-    @FXML
-    private Button confirmArrivedOrder;
+    private ChoiceBox<String> orderArrivedChoice;
 
     @FXML
     private TableView<Order> table;
@@ -66,8 +46,16 @@ public class OrdersPage implements Initializable {
     @Override
     public void initialize( URL url, ResourceBundle resourceBundle ) {
         nameColumn.setCellValueFactory( new PropertyValueFactory<>( "name" ) );
+        table.setItems( FXCollections.observableArrayList( DataManager.getOrders().values() ) );
 
-        table.setItems( FXCollections.observableArrayList( DataManager.getOrders() ) );
+        Map<String, Order> orders = DataManager.getOrders();
+
+        if (orders.size() != 0) {
+            List<String> list = new ArrayList<>( orders.keySet() );
+            orderArrivedChoice.setValue( list.get( 0 ) );
+            orderArrivedChoice.setItems( FXCollections.observableArrayList(list) );
+        }
+
     }
 
     @FXML
@@ -85,9 +73,8 @@ public class OrdersPage implements Initializable {
             Map<String, Box> boxes = DataManager.getBoxes();
             Box box = boxes.get( itemChoice.getValue() );
 
-            for ( Material component : box.getComponents() ) {
-                DataManager.addOrderComponent( component );
-            }
+            DataManager.addOrderComponent( box );
+
 
             orders.getItems().add( box.getName() + " - " + quantity.getValue() );
             logger.log( Level.INFO, "NEW ORDER COMPONENT ADDED: " + box );
@@ -112,8 +99,8 @@ public class OrdersPage implements Initializable {
         if ( orders.getItems().size() != 0 ) {
             Order addedOrder = DataManager.addNewOrder();
             table.getItems().add( addedOrder );
+            DataManager.sendOrderByMail(addedOrder);
         }
-
         orders.getItems().clear();
     }
 

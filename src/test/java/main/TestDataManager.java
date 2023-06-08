@@ -9,6 +9,8 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TestDataManager {
 
@@ -18,6 +20,7 @@ public class TestDataManager {
         setBQWindows();
         setPoloDoors();
         setInventory();
+        DataManager.getOrders().clear();
         DataManager.setCompletedBQDoors( new ArrayList<>() );
         DataManager.setCompletedPoloDoors( new ArrayList<>() );
         DataManager.setCompletedBQWindows( new ArrayList<>() );
@@ -100,7 +103,7 @@ public class TestDataManager {
     }
 
     @Test
-    public void testAddingOnePoloDoor() {
+    public void addingOnePoloDoor() {
         DataManager.addCompletedPoloDoor( new CompletedPoloDoor( "1690x1900 1/1", LocalDate.now(), 1 ) );
         DataManager.confirmCompletedPoloDoors();
         HashMap<String, Material> inventory = DataManager.getInventory();
@@ -113,7 +116,7 @@ public class TestDataManager {
     }
 
     @Test
-    public void testAddingOnePoloDoorWithBigQuantity() {
+    public void addingOnePoloDoorWithBigQuantity() {
         DataManager.addCompletedPoloDoor( new CompletedPoloDoor( "1690x1900 1/1", LocalDate.now(), 4 ) );
         DataManager.confirmCompletedPoloDoors();
         HashMap<String, Material> inventory = DataManager.getInventory();
@@ -126,7 +129,7 @@ public class TestDataManager {
     }
 
     @Test
-    public void testAddingOneBQDoor() {
+    public void addingOneBQDoor() {
         DataManager.addCompletedBQDoor( new CompletedBQDoor( "1690x1900 1/1", LocalDate.now(), 1 ) );
         DataManager.confirmCompletedBQDoors();
         HashMap<String, Material> inventory = DataManager.getInventory();
@@ -139,7 +142,7 @@ public class TestDataManager {
     }
 
     @Test
-    public void testAddingOneBQDoorWithBigQuantity() {
+    public void addingOneBQDoorWithBigQuantity() {
         DataManager.addCompletedBQDoor( new CompletedBQDoor( "1690x1900 1/1", LocalDate.now(), 3 ) );
         DataManager.confirmCompletedBQDoors();
         HashMap<String, Material> inventory = DataManager.getInventory();
@@ -152,7 +155,7 @@ public class TestDataManager {
     }
 
     @Test
-    public void testAddingOneBQWindow() {
+    public void addingOneBQWindow() {
         DataManager.addCompletedBQWindow( new CompletedBQWindow( "1390x1000", LocalDate.now(), 1 ) );
         DataManager.confirmCompletedBQWindows();
         HashMap<String, Material> inventory = DataManager.getInventory();
@@ -165,7 +168,7 @@ public class TestDataManager {
     }
 
     @Test
-    public void testAddingOneBQWindowWithBigQuantity() {
+    public void addingOneBQWindowWithBigQuantity() {
         DataManager.addCompletedBQWindow( new CompletedBQWindow( "1390x1000", LocalDate.now(), 3 ) );
         DataManager.confirmCompletedBQWindows();
         HashMap<String, Material> inventory = DataManager.getInventory();
@@ -175,5 +178,49 @@ public class TestDataManager {
         Assert.assertEquals( 38, inventory.get( "bgd" ).getQuantity() );
         Assert.assertEquals( 0, DataManager.getCompletedBQWindowsSession().size() );
         Assert.assertEquals( 1, DataManager.getCompletedBQWindows().size() );
+    }
+
+    @Test
+    public void addingNewOrder() {
+        Material orderComponent = new Material( "605x1537", 15 );
+        DataManager.addOrderComponent( orderComponent );
+        Order order = DataManager.addNewOrder();
+        Material[] components = order.getComponents();
+
+        Assert.assertEquals( orderComponent, components[0] );
+        Assert.assertEquals( 0, DataManager.getOrderSession().size() );
+    }
+
+    @Test
+    public void addingNewOrderWithBox() {
+        Material firstBoxItem = new Material( "asd", 10 );
+        Material secondBoxItem = new Material( "bgd", 20 );
+        Box box = new Box( "a54wsd", new Material[]{firstBoxItem, secondBoxItem} );
+
+        DataManager.addOrderComponent( box );
+        Order order = DataManager.addNewOrder();
+        Material[] components = order.getComponents();
+
+        Assert.assertEquals( firstBoxItem, components[0] );
+        Assert.assertEquals( secondBoxItem, components[1] );
+        Assert.assertEquals( 0, DataManager.getOrderSession().size() );
+    }
+
+    @Test
+    public void addingNewOrderMixed() {
+        Material firstBoxItem = new Material( "asd", 10 );
+        Material secondBoxItem = new Material( "bgd", 20 );
+        Material orderComponent = new Material( "605x1537", 7 );
+        Box box = new Box( "a54wsd", new Material[]{firstBoxItem, secondBoxItem} );
+
+        DataManager.addOrderComponent( box );
+        DataManager.addOrderComponent( orderComponent );
+        Order order = DataManager.addNewOrder();
+        Material[] components = order.getComponents();
+
+        Assert.assertEquals( firstBoxItem, components[0] );
+        Assert.assertEquals( secondBoxItem, components[1] );
+        Assert.assertEquals( orderComponent, components[2] );
+        Assert.assertEquals( 0, DataManager.getOrderSession().size() );
     }
 }

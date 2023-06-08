@@ -5,13 +5,14 @@ Main.class
 gui\controllers\Tabs.class
 objects\CompletedBQWindow.class
 TestForJSON.class
+gui\controllers\InventoryPage$1.class
+objects\Box.class
 gui\controllers\PoloDoorsPage.class
 objects\Order.class
 objects\BQWindow.class
 objects\Material.class
 gui\controllers\BQDoorsPage.class
 objects\BQDoor.class
-gui\controllers\MainPage$1.class
 gui\controllers\MainPage.class
 objects\CompletedBQDoor.class
 objects\CompletedPoloDoor.class
