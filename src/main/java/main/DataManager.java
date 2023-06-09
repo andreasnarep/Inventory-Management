@@ -65,10 +65,10 @@ public class DataManager {
         } catch ( FileNotFoundException e ) {
             logger.log( Level.WARNING, "File not found: " + e.getMessage() );
         }
-        startMailService();
+        setupMailService();
     }
 
-    private static void startMailService() {
+    private static void setupMailService() {
         host="smtp.gmail.com";
         user="andreasnarep2@gmail.com";//change accordingly
         password="ifslypzmdwrpoktx";//change accordingly
@@ -189,6 +189,14 @@ public class DataManager {
             logger.log( Level.INFO, "message sent successfully...");
 
         } catch ( MessagingException e) {e.printStackTrace();}
+    }
+
+    public static void confirmArrivedOrder(Order arrivedOrder) {
+        for (Material component : arrivedOrder.getComponents()) {
+            Material inventoryItem = inventory.get(component.getName());
+            inventoryItem.addToQuantity(component.getQuantity());
+        }
+        orders.remove(arrivedOrder.getName());
     }
 
     public static void createLowerLimitInventory() {

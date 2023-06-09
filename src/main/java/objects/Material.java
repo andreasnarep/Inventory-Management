@@ -17,6 +17,8 @@ public class Material {
         this.quantity = quantity;
     }
 
+    public void addToQuantity(int add) { quantity += add; }
+
     public boolean isLow() {
         return quantity <= lowerLimit;
     }

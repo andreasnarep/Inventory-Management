@@ -1,17 +1,32 @@
 package gui.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import main.DataManager;
 import objects.Box;
 import objects.Material;
 import objects.Order;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
@@ -39,6 +54,12 @@ public class OrdersPage implements Initializable {
     @FXML
     private TableColumn<Order, String> nameColumn;
 
+    @FXML
+    private Label popupLabel;
+
+    @FXML
+    private ListView<String> popupListView;
+
     private boolean glassesActive = false;
     private boolean boxesActive = false;
     private boolean otherActive = false;
@@ -56,6 +77,57 @@ public class OrdersPage implements Initializable {
             orderArrivedChoice.setItems( FXCollections.observableArrayList(list) );
         }
 
+        table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Order>() {
+            @Override
+            public void changed(ObservableValue<? extends Order> observableValue, Order oldValue, Order newValue) {
+                System.out.println(newValue);
+
+                /*
+                URL url = null;
+                Parent root = null;
+                try {
+                    url = new File("src/main/java/gui/fxml/OrdersPagePopup.fxml").toURI().toURL();
+                    root = FXMLLoader.load(url);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                popupLabel.setText(newValue.getName());
+                for (Material component : newValue.getComponents()) {
+                    popupListView.getItems().add(component.getName() + " - " + component.getQuantity() + "tk");
+                }
+
+                 */
+
+                BorderPane borderPane = new BorderPane();
+                Label popupLabel = new Label(newValue.getName());
+                popupLabel.setFont(Font.font("Verdana", 20));
+                ListView<String> popupListView = new ListView<>();
+                popupListView.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+                for (Material component : newValue.getComponents()) {
+                    popupListView.getItems().add(component.getName() + " - " + component.getQuantity() + "tk");
+                }
+
+                borderPane.setTop(popupLabel);
+                borderPane.setCenter(popupListView);
+                BorderPane.setAlignment(popupLabel, Pos.CENTER);
+                BorderPane.setAlignment(popupListView, Pos.CENTER);
+
+                Insets insets = new Insets(10);
+                BorderPane.setMargin(popupLabel, insets);
+                BorderPane.setMargin(popupListView, insets);
+                popupListView.getSelectionModel().clearSelection();
+                popupListView.setFocusTraversable(false);
+
+                Stage primaryStage = new Stage();
+                primaryStage.setTitle(newValue.getName());
+                primaryStage.setScene(new Scene(borderPane, 300, 300));
+                primaryStage.setMinHeight( 300 );
+                primaryStage.setMinWidth( 300 );
+                primaryStage.show();
+            }
+        });
     }
 
     @FXML
@@ -75,7 +147,6 @@ public class OrdersPage implements Initializable {
 
             DataManager.addOrderComponent( box );
 
-
             orders.getItems().add( box.getName() + " - " + quantity.getValue() );
             logger.log( Level.INFO, "NEW ORDER COMPONENT ADDED: " + box );
         } else if ( otherActive ) {
@@ -91,7 +162,20 @@ public class OrdersPage implements Initializable {
 
     @FXML
     public void confirmArrivedOrder( ActionEvent event ) {
-        logger.log( Level.INFO, "ORDER xxx ARRIVED" );
+        if (orderArrivedChoice.getItems().size() != 0) {
+            Order arrivedOrder = DataManager.getOrders().get(orderArrivedChoice.getValue());
+            DataManager.confirmArrivedOrder(arrivedOrder);
+            table.getItems().remove(arrivedOrder);
+            orderArrivedChoice.getItems().remove(arrivedOrder.getName());
+
+            if (table.getItems().size() == 0) {
+                orderArrivedChoice.setValue("");
+            } else {
+                orderArrivedChoice.setValue(orderArrivedChoice.getItems().get(0));
+            }
+
+            logger.log( Level.INFO, "ORDER ARRIVED: " + arrivedOrder );
+        }
     }
 
     @FXML
@@ -99,7 +183,9 @@ public class OrdersPage implements Initializable {
         if ( orders.getItems().size() != 0 ) {
             Order addedOrder = DataManager.addNewOrder();
             table.getItems().add( addedOrder );
-            DataManager.sendOrderByMail(addedOrder);
+            //DataManager.sendOrderByMail(addedOrder);
+            orderArrivedChoice.getItems().add(addedOrder.getName());
+            orderArrivedChoice.setValue(orderArrivedChoice.getItems().get(0));
         }
         orders.getItems().clear();
     }
@@ -141,5 +227,8 @@ public class OrdersPage implements Initializable {
         glassesActive = false;
         boxesActive = false;
         otherActive = true;
+        //List<String> other = DataManager.getOther();
+        //itemChoice.setItems( FXCollections.observableArrayList( other ) );
+        //itemChoice.setValue( other.get( 0 ) );
     }
 }

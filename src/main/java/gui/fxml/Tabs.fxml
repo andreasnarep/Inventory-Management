@@ -1,40 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-         prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1"
-         xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.Tabs">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/PoloDoorsPage.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.Tabs">
     <tabs>
         <Tab text="Pealeht">
             <content>
-                <fx:include fx:id="mainPage" source="MainPage.fxml"/>
+                <fx:include fx:id="mainPage" source="MainPage.fxml" />
             </content>
         </Tab>
         <Tab text="BQ uksed">
             <content>
-                <fx:include fx:id="bqDoorsPage" source="BQDoorsPage.fxml"/>
+                <fx:include fx:id="bqDoorsPage" source="BQDoorsPage.fxml" />
             </content>
         </Tab>
         <Tab text="BQ aknad">
             <content>
-                <fx:include fx:id="bqWindowsPage" source="BQWindowsPage.fxml"/>
+                <fx:include fx:id="bqWindowsPage" source="BQWindowsPage.fxml" />
             </content>
         </Tab>
         <Tab text="Polo uksed">
             <content>
-                <fx:include fx:id="poloPage" source="PoloDoorsPage.fxml"/>
+                <fx:include fx:id="poloPage" source="PoloDoorsPage.fxml" />
             </content>
         </Tab>
         <Tab text="Ladu">
             <content>
-                <fx:include fx:id="inventoryPage" source="InventoryPage.fxml"/>
+                <fx:include fx:id="inventoryPage" source="InventoryPage.fxml" />
            </content>
         </Tab>
         <Tab text="Tellimused">
             <content>
-                <fx:include fx:id="ordersPage" source="OrdersPage.fxml"/>
+                <fx:include fx:id="ordersPage" source="OrdersPage.fxml" />
             </content>
         </Tab>
         <!--Tab text="Katseta">

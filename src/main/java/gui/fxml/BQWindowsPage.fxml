@@ -58,7 +58,7 @@
                         <Insets top="15.0"/>
                     </HBox.margin>
                 </Region>
-                <Button onAction="#rollbackInsertedData" mnemonicParsing="false" prefHeight="38.0" prefWidth="43.0" text="↩"
+                <Button fx:id="rollbackButton" onAction="#rollbackInsertedData" mnemonicParsing="false" prefHeight="38.0" prefWidth="43.0" text="↩"
                         style="-fx-background-color: #ff0000">
                     <font>
                         <Font size="24.0"/>
@@ -67,7 +67,7 @@
                         <Insets top="3.0"/>
                     </padding>
                 </Button>
-                <Button onAction="#confirmInsertedData" mnemonicParsing="false" prefHeight="38.0" prefWidth="40.0" text="✔"
+                <Button fx:id="confirmButton" onAction="#confirmInsertedData" mnemonicParsing="false" prefHeight="38.0" prefWidth="40.0" text="✔"
                         style="-fx-background-color: #00FF68">
                     <font>
                         <Font size="14.0"/>

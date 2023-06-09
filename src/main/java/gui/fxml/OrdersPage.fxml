@@ -43,12 +43,12 @@
                             <SpinnerValueFactory.IntegerSpinnerValueFactory max="1000" min="1" />
                         </valueFactory>
                     </Spinner>
-                    <Label prefHeight="24.0" prefWidth="139.0" text="Uue tellimuse lisamine" GridPane.columnIndex="1">
+                    <Label prefHeight="20.0" prefWidth="161.0" text="Uue tellimuse lisamine" GridPane.columnIndex="1">
                         <font>
-                            <Font size="14.0" />
+                            <Font name="System Bold" size="14.0" />
                         </font>
                     </Label>
-                    <ListView fx:id="orders" prefHeight="122.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <ListView fx:id="orders" focusTraversable="false" prefHeight="122.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                         <GridPane.margin>
                             <Insets right="10.0" />
                         </GridPane.margin>
@@ -93,7 +93,7 @@
                     <Button fx:id="confirmArrivedOrder" mnemonicParsing="false" onAction="#confirmArrivedOrder" text="Kinnita" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <Label text="Kohalejõudnud tellimus" GridPane.columnIndex="1">
                         <font>
-                            <Font size="14.0" />
+                            <Font name="System Bold" size="14.0" />
                         </font>
                     </Label>
                 </children>
