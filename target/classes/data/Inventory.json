@@ -2,7 +2,8 @@
   {
     "name": "605x1537",
     "quantity": 3,
-    "lowerLimit": 5
+    "lowerLimit": 5,
+    "slat": "15mm"
   },
   {
     "name": "asd",
@@ -12,7 +13,8 @@
   {
     "name": "545x775",
     "quantity": 30,
-    "lowerLimit": 7
+    "lowerLimit": 7,
+    "slat": "10mm"
   },
   {
     "name": "495x775",

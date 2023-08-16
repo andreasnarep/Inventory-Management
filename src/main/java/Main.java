@@ -41,5 +41,12 @@ public class Main extends Application {
         primaryStage.setMinWidth( 668 );
         primaryStage.show();
         logger.log( Level.INFO, "GUI started succesfully." );
+
+        primaryStage.setOnCloseRequest( new EventHandler<WindowEvent>() {
+            @Override
+            public void handle( WindowEvent windowEvent ) {
+                DataManager.writeData();
+            }
+        } );
     }
 }

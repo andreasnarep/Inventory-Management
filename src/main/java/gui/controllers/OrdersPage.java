@@ -135,7 +135,9 @@ public class OrdersPage implements Initializable {
         if ( glassesActive ) {
             String name = itemChoice.getValue();
             Integer quantityValue = quantity.getValue();
-            Material component = new Material( itemChoice.getValue(), quantityValue );
+
+            Material inventoryItem = DataManager.getInventory().get(name);
+            Material component = new Material( inventoryItem.getName(), quantityValue, inventoryItem.getSlat() );
 
             orders.getItems().add( name + " - " + quantityValue );
             DataManager.addOrderComponent( component );

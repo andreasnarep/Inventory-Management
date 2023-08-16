@@ -1,3 +1,4 @@
+main\DataManager$1.class
 gui\controllers\OrdersPage.class
 gui\controllers\TestingPage.class
 main\Logic.class
@@ -11,10 +12,13 @@ gui\controllers\PoloDoorsPage.class
 objects\Order.class
 objects\BQWindow.class
 objects\Material.class
+gui\controllers\OrdersPage$1.class
 gui\controllers\BQDoorsPage.class
+TestForMail.class
 objects\BQDoor.class
 gui\controllers\MainPage.class
 objects\CompletedBQDoor.class
+TestForMail$1.class
 objects\CompletedPoloDoor.class
 main\DataReader.class
 main\DataManager.class

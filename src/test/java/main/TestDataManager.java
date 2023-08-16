@@ -223,4 +223,76 @@ public class TestDataManager {
         Assert.assertEquals( orderComponent, components[2] );
         Assert.assertEquals( 0, DataManager.getOrderSession().size() );
     }
+
+    @Test
+    public void addingPoloDoorWithRollback() {
+        DataManager.addCompletedPoloDoor( new CompletedPoloDoor( "1690x1900 1/1", LocalDate.now(), 4 ) );
+        DataManager.addCompletedPoloDoor( new CompletedPoloDoor( "1690x2050 1/1", LocalDate.now(), 2 ) );
+        DataManager.rollbackCompletedPoloDoor();
+        DataManager.confirmCompletedPoloDoors();
+        HashMap<String, Material> inventory = DataManager.getInventory();
+
+        Assert.assertEquals( 7, inventory.get( "605x1537" ).getQuantity() );
+        Assert.assertEquals( 36, inventory.get( "asd" ).getQuantity() );
+        Assert.assertEquals( 34, inventory.get( "bgd" ).getQuantity() );
+        Assert.assertEquals( 0, DataManager.getCompletedPoloDoorsSession().size() );
+        Assert.assertEquals( 1, DataManager.getCompletedPoloDoors().size() );
+    }
+
+    @Test
+    public void addingBQWindowWithRollback() {
+        DataManager.addCompletedBQWindow( new CompletedBQWindow( "1390x1000", LocalDate.now(), 1 ) );
+        DataManager.addCompletedBQWindow( new CompletedBQWindow( "1290x1000", LocalDate.now(), 1 ) );
+        DataManager.rollbackCompletedBQWindow();
+        DataManager.confirmCompletedBQWindows();
+        HashMap<String, Material> inventory = DataManager.getInventory();
+
+        Assert.assertEquals( 28, inventory.get( "545x775" ).getQuantity() );
+        Assert.assertEquals( 32, inventory.get( "asd" ).getQuantity() );
+        Assert.assertEquals( 46, inventory.get( "bgd" ).getQuantity() );
+        Assert.assertEquals( 0, DataManager.getCompletedBQWindowsSession().size() );
+        Assert.assertEquals( 1, DataManager.getCompletedBQWindows().size() );
+    }
+
+    @Test
+    public void addingBQDoorWithRollback() {
+        DataManager.addCompletedBQDoor( new CompletedBQDoor( "1690x1900 1/1", LocalDate.now(), 3 ) );
+        DataManager.addCompletedBQDoor( new CompletedBQDoor( "1588x1965 1/1", LocalDate.now(), 3 ) );
+        DataManager.rollbackCompletedBQDoor();
+        DataManager.confirmCompletedBQDoors();
+        HashMap<String, Material> inventory = DataManager.getInventory();
+
+        Assert.assertEquals( 12, inventory.get( "605x1537" ).getQuantity() );
+        Assert.assertEquals( 28, inventory.get( "asd" ).getQuantity() );
+        Assert.assertEquals( 26, inventory.get( "bgd" ).getQuantity() );
+        Assert.assertEquals( 0, DataManager.getCompletedBQDoorsSession().size() );
+        Assert.assertEquals( 1, DataManager.getCompletedBQDoors().size() );
+    }
+
+    @Test
+    public void addingMixedDoorsAndWindows() {
+        DataManager.addCompletedPoloDoor( new CompletedPoloDoor( "1690x1900 1/1", LocalDate.now(), 2 ) );
+        DataManager.addCompletedBQDoor( new CompletedBQDoor( "1690x1900 1/1", LocalDate.now(), 4 ) );
+        DataManager.addCompletedBQWindow( new CompletedBQWindow( "1390x1000", LocalDate.now(), 1 ) );
+
+        DataManager.confirmCompletedPoloDoors();
+        DataManager.confirmCompletedBQDoors();
+        DataManager.confirmCompletedBQWindows();
+        DataManager.createLowerLimitInventory();
+
+        HashMap<String, Material> inventory = DataManager.getInventory();
+
+        Assert.assertEquals( 7 , inventory.get( "605x1537" ).getQuantity());
+        Assert.assertEquals( 14 , inventory.get( "asd" ).getQuantity());
+        Assert.assertEquals( 6 , inventory.get( "bgd" ).getQuantity());
+        Assert.assertEquals( 28 , inventory.get( "545x775" ).getQuantity());
+        Assert.assertEquals( 1, DataManager.getLowerLimitInventory().size() );
+
+        Assert.assertEquals( 0, DataManager.getCompletedBQDoorsSession().size() );
+        Assert.assertEquals( 1, DataManager.getCompletedBQDoors().size() );
+        Assert.assertEquals( 0, DataManager.getCompletedBQWindowsSession().size() );
+        Assert.assertEquals( 1, DataManager.getCompletedBQWindows().size() );
+        Assert.assertEquals( 0, DataManager.getCompletedPoloDoorsSession().size() );
+        Assert.assertEquals( 1, DataManager.getCompletedPoloDoors().size() );
+    }
 }
