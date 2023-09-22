@@ -26,10 +26,10 @@ public class DataManager {
     private static Properties props;
 
     //juhu
-    private static final Logger logger = Logger.getLogger( DataManager.class.getName() );
-    private static String[] filesToRead = { "BQDoors.json", "BQWindows.json", "Inventory.json",
+    private static final Logger logger = Logger.getLogger(DataManager.class.getName());
+    private static String[] filesToRead = {"BQDoors.json", "BQWindows.json", "Inventory.json",
             "Orders.json", "PoloDoors.json", "CompletedBQDoors.json",
-            "CompletedBQWindows.json", "CompletedPoloDoors.json", "Glasses.json", "Boxes.json" };
+            "CompletedBQWindows.json", "CompletedPoloDoors.json", "Glasses.json", "Boxes.json"};
 
     private static HashMap<String, PoloDoor> poloDoors;
     private static HashMap<String, BQDoor> bqDoors;
@@ -62,9 +62,9 @@ public class DataManager {
     public static void start() throws IOException, ParseException {
         try {
             readData();
-            logger.log( Level.INFO, "All of  the data read succesfully." );
-        } catch ( FileNotFoundException e ) {
-            logger.log( Level.WARNING, "File not found: " + e.getMessage() );
+            logger.log(Level.INFO, "All of  the data read succesfully.");
+        } catch (FileNotFoundException e) {
+            logger.log(Level.WARNING, "File not found: " + e.getMessage());
         }
         setupMailService();
     }
@@ -76,16 +76,16 @@ public class DataManager {
         to = "andreasnarep2@gmail.com";//change accordingly
 
         props = new Properties();
-        props.put( "mail.smtp.host", host );
-        props.put( "mail.smtp.auth", "true" );
-        props.put( "mail.smtp.port", "465" );
-        props.put( "mail.smtp.ssl.enable", "true" );
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.ssl.enable", "true");
     }
 
     public static void readData() throws IOException, ParseException {
 
-        for ( String file : filesToRead ) {
-            switch ( file ) {
+        for (String file : filesToRead) {
+            switch (file) {
                 case "BQDoors.json":
                     bqDoors = dataReader.readBQDoors();
                     break;
@@ -118,10 +118,11 @@ public class DataManager {
                     boxes = dataReader.readBoxes();
                     break;
                 default:
-                    throw new FileNotFoundException( file );
+                    throw new FileNotFoundException(file);
             }
         }
 
+        /*
         System.out.println( "----------------" );
         for ( String door : bqDoors.keySet() )
             System.out.println( bqDoors.get( door ) );
@@ -157,59 +158,61 @@ public class DataManager {
         System.out.println( "----------------" );
         for ( String key : boxes.keySet() )
             System.out.println( boxes.get( key ) );
+
+         */
     }
 
-    public static void sendOrderByMail( Order order ) {
-        Session session = Session.getDefaultInstance( props,
+    public static void sendOrderByMail(Order order) {
+        Session session = Session.getDefaultInstance(props,
                 new Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication( user, password );
+                        return new PasswordAuthentication(user, password);
                     }
-                } );
+                });
 
         //Compose the message
         try {
-            MimeMessage message = new MimeMessage( session );
-            message.setFrom( new InternetAddress( user ) );
-            message.addRecipient( Message.RecipientType.TO, new InternetAddress( to ) );
-            message.setSubject( "Tellimus - " + order.getName() );
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Tellimus - " + order.getName());
 
             StringBuilder sb = new StringBuilder();
-            sb.append( "Tellimuse nimi - " ).append( order.getName() ).append( "\n" );
+            sb.append("Tellimuse nimi - ").append(order.getName()).append("\n");
             //sb.append("Tellitud asjad:");
 
             List<Material> slat15mm = new ArrayList<>();
             List<Material> slat10mm = new ArrayList<>();
             List<Material> other = new ArrayList<>();
 
-            for ( Material material : order.getComponents() ) {
-                if ( material.getSlat() == null ) {
-                    other.add( material );
-                } else if ( material.getSlat().equals( "10mm" ) ) {
-                    slat10mm.add( material );
-                } else if ( material.getSlat().equals( "15mm" ) ) {
-                    slat15mm.add( material );
+            for (Material material : order.getComponents()) {
+                if (material.getSlat() == null) {
+                    other.add(material);
+                } else if (material.getSlat().equals("10mm")) {
+                    slat10mm.add(material);
+                } else if (material.getSlat().equals("15mm")) {
+                    slat15mm.add(material);
                 }
             }
 
-            if ( ! slat15mm.isEmpty() ) {
-                sb.append( "\nKlaasid 15mm:" );
-                for ( Material material : slat15mm ) {
-                    sb.append( "\n\t" ).append( material.getName() ).append( " - " ).append( material.getQuantity() ).append( "tk" );
+            if (!slat15mm.isEmpty()) {
+                sb.append("\nKlaasid 15mm:");
+                for (Material material : slat15mm) {
+                    sb.append("\n\t").append(material.getName()).append(" - ").append(material.getQuantity()).append("tk");
                 }
             }
 
-            if ( ! slat10mm.isEmpty() ) {
-                sb.append( "\n\nKlaasid 10mm:" );
-                for ( Material material : slat10mm ) {
-                    sb.append( "\n\t" ).append( material.getName() ).append( " - " ).append( material.getQuantity() ).append( "tk" );
+            if (!slat10mm.isEmpty()) {
+                sb.append("\n\nKlaasid 10mm:");
+                for (Material material : slat10mm) {
+                    sb.append("\n\t").append(material.getName()).append(" - ").append(material.getQuantity()).append("tk");
                 }
             }
 
-            if ( ! other.isEmpty() ) {
-                sb.append( "\n\nMuu:" );
-                for ( Material material : other ) {
-                    sb.append( "\n\t" ).append( material.getName() ).append( " - " ).append( material.getQuantity() ).append( "tk" );
+            if (!other.isEmpty()) {
+                sb.append("\n\nMuu:");
+                for (Material material : other) {
+                    sb.append("\n\t").append(material.getName()).append(" - ").append(material.getQuantity()).append("tk");
                 }
             }
 
@@ -217,205 +220,205 @@ public class DataManager {
             //    sb.append("\n\t").append(material.getName()).append(" - ").append(material.getQuantity()).append("tk");
             //}
 
-            message.setText( sb.toString() );
+            message.setText(sb.toString());
 
             //send the message
-            Transport.send( message );
+            Transport.send(message);
 
-            logger.log( Level.INFO, "message sent successfully..." );
+            logger.log(Level.INFO, "message sent successfully...");
 
-        } catch ( MessagingException e ) {
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
 
-    public static void confirmArrivedOrder( Order arrivedOrder ) {
-        for ( Material component : arrivedOrder.getComponents() ) {
-            Material inventoryItem = inventory.get( component.getName() );
-            inventoryItem.addToQuantity( component.getQuantity() );
+    public static void confirmArrivedOrder(Order arrivedOrder) {
+        for (Material component : arrivedOrder.getComponents()) {
+            Material inventoryItem = inventory.get(component.getName());
+            inventoryItem.addToQuantity(component.getQuantity());
         }
-        orders.remove( arrivedOrder.getName() );
+        orders.remove(arrivedOrder.getName());
     }
 
     public static void createLowerLimitInventory() {
         lowerLimitInventory.clear();
-        for ( String key : inventory.keySet() ) {
-            Material material = inventory.get( key );
-            if ( material.isLow() ) {
-                lowerLimitInventory.add( material );
+        for (String key : inventory.keySet()) {
+            Material material = inventory.get(key);
+            if (material.isLow()) {
+                lowerLimitInventory.add(material);
             }
         }
     }
 
-    public static void addOrderComponent( Material component ) {
-        orderSession.add( component );
+    public static void addOrderComponent(Material component) {
+        orderSession.add(component);
     }
 
-    public static void addOrderComponent( Box component ) {
-        for ( Material item : component.getComponents() ) {
-            addOrderComponent( item );
+    public static void addOrderComponent(Box component) {
+        for (Material item : component.getComponents()) {
+            addOrderComponent(item);
         }
     }
 
-    public static void addCompletedPoloDoor( CompletedPoloDoor completedPoloDoor ) {
-        completedPoloDoorsSession.add( completedPoloDoor );
+    public static void addCompletedPoloDoor(CompletedPoloDoor completedPoloDoor) {
+        completedPoloDoorsSession.add(completedPoloDoor);
     }
 
-    public static void addCompletedBQDoor( CompletedBQDoor completedBQDoor ) {
-        completedBQDoorsSession.add( completedBQDoor );
+    public static void addCompletedBQDoor(CompletedBQDoor completedBQDoor) {
+        completedBQDoorsSession.add(completedBQDoor);
     }
 
-    public static void addCompletedBQWindow( CompletedBQWindow completedBQWindow ) {
-        completedBQWindowsSession.add( completedBQWindow );
+    public static void addCompletedBQWindow(CompletedBQWindow completedBQWindow) {
+        completedBQWindowsSession.add(completedBQWindow);
     }
 
     public static Order addNewOrder() {
         Material[] components = new Material[orderSession.size()];
-        components = orderSession.toArray( components );
-        String orderName = UUID.randomUUID().toString().substring( 0, 6 );
+        components = orderSession.toArray(components);
+        String orderName = UUID.randomUUID().toString().substring(0, 6);
 
-        Order order = new Order( orderName, LocalDate.now(), components );
+        Order order = new Order(orderName, LocalDate.now(), components);
         orderSession.clear();
-        orders.put( orderName, order );
+        orders.put(orderName, order);
 
-        logger.log( Level.INFO, "NEW ORDER: " + order );
+        logger.log(Level.INFO, "NEW ORDER: " + order);
         //sendOrderByMail(order);
         return order;
     }
 
     public static void confirmCompletedPoloDoors() {
-        if ( completedPoloDoorsSession.size() != 0 ) {
-            for ( CompletedPoloDoor completedDoor : completedPoloDoorsSession ) {
-                PoloDoor door = poloDoors.get( completedDoor.getDoorName() );
+        if (completedPoloDoorsSession.size() != 0) {
+            for (CompletedPoloDoor completedDoor : completedPoloDoorsSession) {
+                PoloDoor door = poloDoors.get(completedDoor.getDoorName());
                 Map<String, Integer> materialNameAndQuantity = door.getMaterialNameAndQuantity();
 
-                for ( String key : materialNameAndQuantity.keySet() ) {
-                    Material inventoryMaterial = inventory.get( key );
-                    int toSubtract = materialNameAndQuantity.get( key ) * completedDoor.getQuantity();
+                for (String key : materialNameAndQuantity.keySet()) {
+                    Material inventoryMaterial = inventory.get(key);
+                    int toSubtract = materialNameAndQuantity.get(key) * completedDoor.getQuantity();
                     int subtractFrom = inventoryMaterial.getQuantity();
-                    inventoryMaterial.setQuantity( subtractFrom - toSubtract );
+                    inventoryMaterial.setQuantity(subtractFrom - toSubtract);
 
-                    System.out.println( inventoryMaterial );
+                    //System.out.println(inventoryMaterial);
                 }
             }
-            completedPoloDoors.addAll( FXCollections.observableArrayList( completedPoloDoorsSession ) );
+            completedPoloDoors.addAll(FXCollections.observableArrayList(completedPoloDoorsSession));
             completedPoloDoorsSession.clear();
         }
     }
 
     public static void confirmCompletedBQDoors() {
-        if ( completedBQDoorsSession.size() != 0 ) {
-            for ( CompletedBQDoor completedDoor : completedBQDoorsSession ) {
-                BQDoor door = bqDoors.get( completedDoor.getDoorName() );
+        if (completedBQDoorsSession.size() != 0) {
+            for (CompletedBQDoor completedDoor : completedBQDoorsSession) {
+                BQDoor door = bqDoors.get(completedDoor.getDoorName());
                 Map<String, Integer> materialNameAndQuantity = door.getMaterialNameAndQuantity();
 
-                for ( String key : materialNameAndQuantity.keySet() ) {
-                    Material inventoryMaterial = inventory.get( key );
-                    int toSubtract = materialNameAndQuantity.get( key ) * completedDoor.getQuantity();
+                for (String key : materialNameAndQuantity.keySet()) {
+                    Material inventoryMaterial = inventory.get(key);
+                    int toSubtract = materialNameAndQuantity.get(key) * completedDoor.getQuantity();
                     int subtractFrom = inventoryMaterial.getQuantity();
-                    inventoryMaterial.setQuantity( subtractFrom - toSubtract );
+                    inventoryMaterial.setQuantity(subtractFrom - toSubtract);
 
-                    System.out.println( inventoryMaterial );
+                    //System.out.println(inventoryMaterial);
                 }
             }
-            completedBQDoors.addAll( FXCollections.observableArrayList( completedBQDoorsSession ) );
+            completedBQDoors.addAll(FXCollections.observableArrayList(completedBQDoorsSession));
             completedBQDoorsSession.clear();
         }
     }
 
     public static void confirmCompletedBQWindows() {
-        if ( completedBQWindowsSession.size() != 0 ) {
-            for ( CompletedBQWindow completedWindow : completedBQWindowsSession ) {
-                BQWindow window = bqWindows.get( completedWindow.getWindowName() );
+        if (completedBQWindowsSession.size() != 0) {
+            for (CompletedBQWindow completedWindow : completedBQWindowsSession) {
+                BQWindow window = bqWindows.get(completedWindow.getWindowName());
                 Map<String, Integer> materialNameAndQuantity = window.getMaterialNameAndQuantity();
 
-                for ( String key : materialNameAndQuantity.keySet() ) {
-                    Material inventoryMaterial = inventory.get( key );
-                    int toSubtract = materialNameAndQuantity.get( key ) * completedWindow.getQuantity();
+                for (String key : materialNameAndQuantity.keySet()) {
+                    Material inventoryMaterial = inventory.get(key);
+                    int toSubtract = materialNameAndQuantity.get(key) * completedWindow.getQuantity();
                     int subtractFrom = inventoryMaterial.getQuantity();
-                    inventoryMaterial.setQuantity( subtractFrom - toSubtract );
+                    inventoryMaterial.setQuantity(subtractFrom - toSubtract);
 
-                    System.out.println( inventoryMaterial );
+                    //System.out.println(inventoryMaterial);
                 }
             }
-            completedBQWindows.addAll( FXCollections.observableArrayList( completedBQWindowsSession ) );
+            completedBQWindows.addAll(FXCollections.observableArrayList(completedBQWindowsSession));
             completedBQWindowsSession.clear();
         }
     }
 
     public static Material rollbackOrderComponent() {
-        if ( orderSession.size() != 0 ) {
-            return orderSession.remove( orderSession.size() - 1 );
+        if (orderSession.size() != 0) {
+            return orderSession.remove(orderSession.size() - 1);
         }
         throw new NoSuchElementException();
     }
 
     public static CompletedPoloDoor rollbackCompletedPoloDoor() {
-        if ( completedPoloDoorsSession.size() != 0 ) {
-            return completedPoloDoorsSession.remove( completedPoloDoorsSession.size() - 1 );
+        if (completedPoloDoorsSession.size() != 0) {
+            return completedPoloDoorsSession.remove(completedPoloDoorsSession.size() - 1);
         }
         throw new NoSuchElementException();
     }
 
     public static CompletedBQDoor rollbackCompletedBQDoor() {
-        if ( completedBQDoorsSession.size() != 0 ) {
-            return completedBQDoorsSession.remove( completedBQDoorsSession.size() - 1 );
+        if (completedBQDoorsSession.size() != 0) {
+            return completedBQDoorsSession.remove(completedBQDoorsSession.size() - 1);
         }
         throw new NoSuchElementException();
     }
 
     public static CompletedBQWindow rollbackCompletedBQWindow() {
-        if ( completedBQWindowsSession.size() != 0 ) {
-            return completedBQWindowsSession.remove( completedBQWindowsSession.size() - 1 );
+        if (completedBQWindowsSession.size() != 0) {
+            return completedBQWindowsSession.remove(completedBQWindowsSession.size() - 1);
         }
         throw new NoSuchElementException();
     }
 
-    public static void setPoloDoors( HashMap<String, PoloDoor> poloDoors ) {
+    public static void setPoloDoors(HashMap<String, PoloDoor> poloDoors) {
         DataManager.poloDoors = poloDoors;
     }
 
-    public static void setBqDoors( HashMap<String, BQDoor> bqDoors ) {
+    public static void setBqDoors(HashMap<String, BQDoor> bqDoors) {
         DataManager.bqDoors = bqDoors;
     }
 
-    public static void setBqWindows( HashMap<String, BQWindow> bqWindows ) {
+    public static void setBqWindows(HashMap<String, BQWindow> bqWindows) {
         DataManager.bqWindows = bqWindows;
     }
 
-    public static void setInventory( HashMap<String, Material> inventory ) {
+    public static void setInventory(HashMap<String, Material> inventory) {
         DataManager.inventory = inventory;
     }
 
-    public static void setOrders( Map<String, Order> orders ) {
+    public static void setOrders(Map<String, Order> orders) {
         DataManager.orders = orders;
     }
 
-    public static void setLowerLimitInventory( List<Material> lowerLimitInventory ) {
+    public static void setLowerLimitInventory(List<Material> lowerLimitInventory) {
         DataManager.lowerLimitInventory = lowerLimitInventory;
     }
 
-    public static void setCompletedPoloDoors( List<CompletedPoloDoor> completedPoloDoors ) {
+    public static void setCompletedPoloDoors(List<CompletedPoloDoor> completedPoloDoors) {
         DataManager.completedPoloDoors = completedPoloDoors;
     }
 
-    public static void setCompletedPoloDoorsSession( List<CompletedPoloDoor> completedPoloDoorsSession ) {
+    public static void setCompletedPoloDoorsSession(List<CompletedPoloDoor> completedPoloDoorsSession) {
         DataManager.completedPoloDoorsSession = completedPoloDoorsSession;
     }
 
-    public static void setCompletedBQDoors( List<CompletedBQDoor> completedBQDoors ) {
+    public static void setCompletedBQDoors(List<CompletedBQDoor> completedBQDoors) {
         DataManager.completedBQDoors = completedBQDoors;
     }
 
-    public static void setCompletedBQDoorsSession( List<CompletedBQDoor> completedBQDoorsSession ) {
+    public static void setCompletedBQDoorsSession(List<CompletedBQDoor> completedBQDoorsSession) {
         DataManager.completedBQDoorsSession = completedBQDoorsSession;
     }
 
-    public static void setCompletedBQWindows( List<CompletedBQWindow> completedBQWindows ) {
+    public static void setCompletedBQWindows(List<CompletedBQWindow> completedBQWindows) {
         DataManager.completedBQWindows = completedBQWindows;
     }
 
-    public static void setCompletedBQWindowsSession( List<CompletedBQWindow> completedBQWindowsSession ) {
+    public static void setCompletedBQWindowsSession(List<CompletedBQWindow> completedBQWindowsSession) {
         DataManager.completedBQWindowsSession = completedBQWindowsSession;
     }
 
@@ -496,25 +499,25 @@ class DataWriter {
 
         JSONArray ordersList = new JSONArray();
 
-        for ( Order order : orders.values() ) {
+        for (Order order : orders.values()) {
             JSONObject orderJsonObject = new JSONObject();
-            orderJsonObject.put( "name", order.getName() );
-            orderJsonObject.put( "date", order.getDate().toString() );
+            orderJsonObject.put("name", order.getName());
+            orderJsonObject.put("date", order.getDate().toString());
 
             JSONObject componentsJsonObject = new JSONObject();
-            for ( Material component : order.getComponents() ) {
-                componentsJsonObject.put( component.getName(), component.getQuantity() );
+            for (Material component : order.getComponents()) {
+                componentsJsonObject.put(component.getName(), component.getQuantity());
             }
 
-            orderJsonObject.put( "components", componentsJsonObject );
-            ordersList.add( orderJsonObject );
+            orderJsonObject.put("components", componentsJsonObject);
+            ordersList.add(orderJsonObject);
         }
 
-        try ( FileWriter writer = new FileWriter( "src/main/resources/data/TestForJson.json" ) ) {
-            writer.write( ordersList.toJSONString().replace( "\\/", "/" ) );
+        try (FileWriter writer = new FileWriter("src/main/resources/data/Orders.json")) {
+            writer.write(ordersList.toJSONString().replace("\\/", "/"));
             writer.flush();
-        } catch ( IOException e ) {
-            System.out.println( e );
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
@@ -523,19 +526,20 @@ class DataWriter {
 
         JSONArray inventoryList = new JSONArray();
 
-        for ( Material item : inventory.values() ) {
+        for (Material item : inventory.values()) {
             JSONObject itemJsonObject = new JSONObject();
-            itemJsonObject.put( "name", item.getName() );
-            itemJsonObject.put( "quantity", item.getQuantity() );
-            itemJsonObject.put( "lowerLimit", item.getLowerLimit() );
-            inventoryList.add( itemJsonObject );
+            itemJsonObject.put("name", item.getName());
+            itemJsonObject.put("quantity", item.getQuantity());
+            itemJsonObject.put("lowerLimit", item.getLowerLimit());
+            itemJsonObject.put("slat", item.getSlat());
+            inventoryList.add(itemJsonObject);
         }
 
-        try ( FileWriter writer = new FileWriter( "src/main/resources/data/TestForJson.json" ) ) {
-            writer.write( inventoryList.toJSONString().replace( "\\/", "/" ) );
+        try (FileWriter writer = new FileWriter("src/main/resources/data/Inventory.json")) {
+            writer.write(inventoryList.toJSONString().replace("\\/", "/"));
             writer.flush();
-        } catch ( IOException e ) {
-            System.out.println( e );
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
@@ -548,49 +552,49 @@ class DataWriter {
         JSONArray completedPoloDoorsList = new JSONArray();
         JSONArray completedBQWindowsList = new JSONArray();
 
-        for ( CompletedBQDoor door : completedBQDoors ) {
+        for (CompletedBQDoor door : completedBQDoors) {
             JSONObject doorJsonObject = new JSONObject();
-            doorJsonObject.put( "name", door.getDoorName() );
-            doorJsonObject.put( "date", door.getDate().toString() );
-            doorJsonObject.put( "quantity", door.getQuantity() );
-            completedBQDoorsList.add( doorJsonObject );
+            doorJsonObject.put("name", door.getDoorName());
+            doorJsonObject.put("date", door.getDate().toString());
+            doorJsonObject.put("quantity", door.getQuantity());
+            completedBQDoorsList.add(doorJsonObject);
         }
 
-        for ( CompletedPoloDoor door : completedPoloDoors ) {
+        for (CompletedPoloDoor door : completedPoloDoors) {
             JSONObject doorJsonObject = new JSONObject();
-            doorJsonObject.put( "name", door.getDoorName() );
-            doorJsonObject.put( "date", door.getDate().toString() );
-            doorJsonObject.put( "quantity", door.getQuantity() );
-            completedPoloDoorsList.add( doorJsonObject );
+            doorJsonObject.put("name", door.getDoorName());
+            doorJsonObject.put("date", door.getDate().toString());
+            doorJsonObject.put("quantity", door.getQuantity());
+            completedPoloDoorsList.add(doorJsonObject);
         }
 
-        for ( CompletedBQWindow window : completedBQWindows ) {
+        for (CompletedBQWindow window : completedBQWindows) {
             JSONObject doorJsonObject = new JSONObject();
-            doorJsonObject.put( "name", window.getWindowName() );
-            doorJsonObject.put( "date", window.getDate().toString() );
-            doorJsonObject.put( "quantity", window.getQuantity() );
-            completedBQWindowsList.add( doorJsonObject );
+            doorJsonObject.put("name", window.getWindowName());
+            doorJsonObject.put("date", window.getDate().toString());
+            doorJsonObject.put("quantity", window.getQuantity());
+            completedBQWindowsList.add(doorJsonObject);
         }
 
-        try ( FileWriter writer = new FileWriter( "src/main/resources/data/CompletedBQDoors.json" ) ) {
-            writer.write( completedBQDoorsList.toJSONString().replace( "\\/", "/" ) );
+        try (FileWriter writer = new FileWriter("src/main/resources/data/CompletedBQDoors.json")) {
+            writer.write(completedBQDoorsList.toJSONString().replace("\\/", "/"));
             writer.flush();
-        } catch ( IOException e ) {
-            System.out.println( e );
+        } catch (IOException e) {
+            System.out.println(e);
         }
 
-        try ( FileWriter writer = new FileWriter( "src/main/resources/data/CompletedPoloDoors.json" ) ) { //change to completed polo doors file
-            writer.write( completedPoloDoorsList.toJSONString().replace( "\\/", "/" ) );
+        try (FileWriter writer = new FileWriter("src/main/resources/data/CompletedPoloDoors.json")) { //change to completed polo doors file
+            writer.write(completedPoloDoorsList.toJSONString().replace("\\/", "/"));
             writer.flush();
-        } catch ( IOException e ) {
-            System.out.println( e );
+        } catch (IOException e) {
+            System.out.println(e);
         }
 
-        try ( FileWriter writer = new FileWriter( "src/main/resources/data/CompletedBQWindows.json" ) ) { //change to completed bq windows file
-            writer.write( completedBQWindowsList.toJSONString().replace( "\\/", "/" ) );
+        try (FileWriter writer = new FileWriter("src/main/resources/data/CompletedBQWindows.json")) { //change to completed bq windows file
+            writer.write(completedBQWindowsList.toJSONString().replace("\\/", "/"));
             writer.flush();
-        } catch ( IOException e ) {
-            System.out.println( e );
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 }
@@ -600,27 +604,27 @@ class DataReader {
         String filePath = "src/main/resources/data/BQDoors.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new HashMap<>();
         }
 
-        FileReader fileReader = new FileReader( filePath );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        HashMap<String, BQDoor> doors = new HashMap<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(filePath);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        LinkedHashMap<String, BQDoor> doors = new LinkedHashMap<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String doorName = (String) ( (JSONObject) object ).get( "name" );
-            JSONObject materialsJSONObject = (JSONObject) ( (JSONObject) object ).get( "materials" );
+        for (Object object : jsonArray.toArray()) {
+            String doorName = (String) ((JSONObject) object).get("name");
+            JSONObject materialsJSONObject = (JSONObject) ((JSONObject) object).get("materials");
             Map<String, Integer> materialsMap = new HashMap<>();
 
-            for ( Object key : materialsJSONObject.keySet() ) {
-                Long quantity = (Long) materialsJSONObject.get( key );
-                materialsMap.put( (String) key, quantity.intValue() );
+            for (Object key : materialsJSONObject.keySet()) {
+                Long quantity = (Long) materialsJSONObject.get(key);
+                materialsMap.put((String) key, quantity.intValue());
             }
 
-            doors.put( doorName, new BQDoor( doorName, materialsMap ) );
+            doors.put(doorName, new BQDoor(doorName, materialsMap));
         }
 
         fileReader.close();
@@ -631,27 +635,27 @@ class DataReader {
         String filePath = "src/main/resources/data/PoloDoors.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new HashMap<>();
         }
 
-        FileReader fileReader = new FileReader( filePath );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        HashMap<String, PoloDoor> doors = new HashMap<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(filePath);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        LinkedHashMap<String, PoloDoor> doors = new LinkedHashMap<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String doorName = (String) ( (JSONObject) object ).get( "name" );
-            JSONObject materialsJSONObject = (JSONObject) ( (JSONObject) object ).get( "materials" );
+        for (Object object : jsonArray.toArray()) {
+            String doorName = (String) ((JSONObject) object).get("name");
+            JSONObject materialsJSONObject = (JSONObject) ((JSONObject) object).get("materials");
             Map<String, Integer> materialsMap = new HashMap<>();
 
-            for ( Object key : materialsJSONObject.keySet() ) {
-                Long quantity = (Long) materialsJSONObject.get( key );
-                materialsMap.put( (String) key, quantity.intValue() );
+            for (Object key : materialsJSONObject.keySet()) {
+                Long quantity = (Long) materialsJSONObject.get(key);
+                materialsMap.put((String) key, quantity.intValue());
             }
 
-            doors.put( doorName, new PoloDoor( doorName, materialsMap ) );
+            doors.put(doorName, new PoloDoor(doorName, materialsMap));
         }
 
         fileReader.close();
@@ -662,27 +666,27 @@ class DataReader {
         String filePath = "src/main/resources/data/BQWindows.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new HashMap<>();
         }
 
-        FileReader fileReader = new FileReader( filePath );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        HashMap<String, BQWindow> windows = new HashMap<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(filePath);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        LinkedHashMap<String, BQWindow> windows = new LinkedHashMap<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String windowName = (String) ( (JSONObject) object ).get( "name" );
-            JSONObject materialsJSONObject = (JSONObject) ( (JSONObject) object ).get( "materials" );
+        for (Object object : jsonArray.toArray()) {
+            String windowName = (String) ((JSONObject) object).get("name");
+            JSONObject materialsJSONObject = (JSONObject) ((JSONObject) object).get("materials");
             Map<String, Integer> materialsMap = new HashMap<>();
 
-            for ( Object key : materialsJSONObject.keySet() ) {
-                Long quantity = (Long) materialsJSONObject.get( key );
-                materialsMap.put( (String) key, quantity.intValue() );
+            for (Object key : materialsJSONObject.keySet()) {
+                Long quantity = (Long) materialsJSONObject.get(key);
+                materialsMap.put((String) key, quantity.intValue());
             }
 
-            windows.put( windowName, new BQWindow( windowName, materialsMap ) );
+            windows.put(windowName, new BQWindow(windowName, materialsMap));
         }
 
         fileReader.close();
@@ -693,25 +697,25 @@ class DataReader {
         String filePath = "src/main/resources/data/Inventory.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new HashMap<>();
         }
 
-        FileReader fileReader = new FileReader( filePath );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        HashMap<String, Material> inventory = new HashMap<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(filePath);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        LinkedHashMap<String, Material> inventory = new LinkedHashMap<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String materialName = (String) ( (JSONObject) object ).get( "name" );
-            Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
-            Long lowerLimit = (Long) ( (JSONObject) object ).get( "lowerLimit" );
-            String slat = (String) ( (JSONObject) object ).get( "slat" );
+        for (Object object : jsonArray.toArray()) {
+            String materialName = (String) ((JSONObject) object).get("name");
+            Long quantity = (Long) ((JSONObject) object).get("quantity");
+            Long lowerLimit = (Long) ((JSONObject) object).get("lowerLimit");
+            String slat = (String) ((JSONObject) object).get("slat");
 
-            System.out.println( slat );
+            //System.out.println(slat);
 
-            inventory.put( materialName, new Material( materialName, quantity.intValue(), lowerLimit.intValue(), slat ) );
+            inventory.put(materialName, new Material(materialName, quantity.intValue(), lowerLimit.intValue(), slat));
         }
 
         fileReader.close();
@@ -722,22 +726,22 @@ class DataReader {
         String filePath = "src/main/resources/data/CompletedPoloDoors.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new ArrayList<>();
         }
 
-        FileReader fileReader = new FileReader( file );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        List<CompletedPoloDoor> doors = new ArrayList<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(file);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        List<CompletedPoloDoor> doors = new ArrayList<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String doorName = (String) ( (JSONObject) object ).get( "name" );
-            String date = (String) ( (JSONObject) object ).get( "date" );
-            Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
+        for (Object object : jsonArray.toArray()) {
+            String doorName = (String) ((JSONObject) object).get("name");
+            String date = (String) ((JSONObject) object).get("date");
+            Long quantity = (Long) ((JSONObject) object).get("quantity");
 
-            doors.add( new CompletedPoloDoor( doorName, date, quantity.intValue() ) );
+            doors.add(new CompletedPoloDoor(doorName, date, quantity.intValue()));
         }
 
         fileReader.close();
@@ -748,21 +752,21 @@ class DataReader {
         String filePath = "src/main/resources/data/CompletedBQDoors.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new ArrayList<>();
         }
 
-        FileReader fileReader = new FileReader( file );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        List<CompletedBQDoor> doors = new ArrayList<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(file);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        List<CompletedBQDoor> doors = new ArrayList<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String doorName = (String) ( (JSONObject) object ).get( "name" );
-            String date = (String) ( (JSONObject) object ).get( "date" );
-            Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
-            doors.add( new CompletedBQDoor( doorName, date, quantity.intValue() ) );
+        for (Object object : jsonArray.toArray()) {
+            String doorName = (String) ((JSONObject) object).get("name");
+            String date = (String) ((JSONObject) object).get("date");
+            Long quantity = (Long) ((JSONObject) object).get("quantity");
+            doors.add(new CompletedBQDoor(doorName, date, quantity.intValue()));
         }
 
         fileReader.close();
@@ -773,22 +777,22 @@ class DataReader {
         String filePath = "src/main/resources/data/CompletedBQWindows.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new ArrayList<>();
         }
 
-        FileReader fileReader = new FileReader( file );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        List<CompletedBQWindow> doors = new ArrayList<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(file);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        List<CompletedBQWindow> doors = new ArrayList<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String windowName = (String) ( (JSONObject) object ).get( "name" );
-            String date = (String) ( (JSONObject) object ).get( "date" );
-            Long quantity = (Long) ( (JSONObject) object ).get( "quantity" );
+        for (Object object : jsonArray.toArray()) {
+            String windowName = (String) ((JSONObject) object).get("name");
+            String date = (String) ((JSONObject) object).get("date");
+            Long quantity = (Long) ((JSONObject) object).get("quantity");
 
-            doors.add( new CompletedBQWindow( windowName, date, quantity.intValue() ) );
+            doors.add(new CompletedBQWindow(windowName, date, quantity.intValue()));
         }
 
         fileReader.close();
@@ -799,31 +803,31 @@ class DataReader {
         String filePath = "src/main/resources/data/Orders.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new HashMap<>();
         }
 
-        FileReader fileReader = new FileReader( file );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        Map<String, Order> orders = new HashMap<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(file);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        Map<String, Order> orders = new HashMap<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String orderName = (String) ( (JSONObject) object ).get( "name" );
-            String date = (String) ( (JSONObject) object ).get( "date" );
+        for (Object object : jsonArray.toArray()) {
+            String orderName = (String) ((JSONObject) object).get("name");
+            String date = (String) ((JSONObject) object).get("date");
 
-            JSONObject componentsJSONObject = (JSONObject) ( (JSONObject) object ).get( "components" );
+            JSONObject componentsJSONObject = (JSONObject) ((JSONObject) object).get("components");
             Material[] components = new Material[componentsJSONObject.keySet().size()];
             int i = 0;
 
-            for ( Object key : componentsJSONObject.keySet() ) {
-                Long val = (Long) componentsJSONObject.get( key );
-                components[i] = new Material( (String) key, val.intValue() );
+            for (Object key : componentsJSONObject.keySet()) {
+                Long val = (Long) componentsJSONObject.get(key);
+                components[i] = new Material((String) key, val.intValue());
                 i++;
             }
 
-            orders.put( orderName, new Order( orderName, LocalDate.parse( date ), components ) );
+            orders.put(orderName, new Order(orderName, LocalDate.parse(date), components));
         }
 
         fileReader.close();
@@ -834,19 +838,19 @@ class DataReader {
         String filePath = "src/main/resources/data/Glasses.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new ArrayList<>();
         }
 
-        FileReader fileReader = new FileReader( file );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        List<String> glasses = new ArrayList<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(file);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        List<String> glasses = new ArrayList<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String glassName = (String) ( (JSONObject) object ).get( "name" );
-            glasses.add( glassName );
+        for (Object object : jsonArray.toArray()) {
+            String glassName = (String) ((JSONObject) object).get("name");
+            glasses.add(glassName);
         }
 
         fileReader.close();
@@ -857,31 +861,31 @@ class DataReader {
         String filePath = "src/main/resources/data/Boxes.json";
         JSONParser jsonParser = new JSONParser();
 
-        File file = new File( filePath );
+        File file = new File(filePath);
 
-        if ( file.length() == 0 ) {
+        if (file.length() == 0) {
             return new HashMap<>();
         }
 
-        FileReader fileReader = new FileReader( file );
-        JSONArray jsonArray = (JSONArray) jsonParser.parse( fileReader );
-        Map<String, Box> boxes = new HashMap<>( jsonArray.size() );
+        FileReader fileReader = new FileReader(file);
+        JSONArray jsonArray = (JSONArray) jsonParser.parse(fileReader);
+        Map<String, Box> boxes = new HashMap<>(jsonArray.size());
 
-        for ( Object object : jsonArray.toArray() ) {
-            String boxName = (String) ( (JSONObject) object ).get( "name" );
+        for (Object object : jsonArray.toArray()) {
+            String boxName = (String) ((JSONObject) object).get("name");
 
-            JSONObject materialsJSONObject = (JSONObject) ( (JSONObject) object ).get( "components" );
+            JSONObject materialsJSONObject = (JSONObject) ((JSONObject) object).get("components");
             Material[] components = new Material[materialsJSONObject.keySet().size()];
             int i = 0;
 
-            for ( Object key : materialsJSONObject.keySet() ) {
-                Long val = (Long) materialsJSONObject.get( key );
-                components[i] = new Material( (String) key, val.intValue() );
+            for (Object key : materialsJSONObject.keySet()) {
+                Long val = (Long) materialsJSONObject.get(key);
+                components[i] = new Material((String) key, val.intValue());
                 i++;
             }
 
-            Box box = new Box( boxName, components );
-            boxes.put( boxName, box );
+            Box box = new Box(boxName, components);
+            boxes.put(boxName, box);
         }
 
         fileReader.close();

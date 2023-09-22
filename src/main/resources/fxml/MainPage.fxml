@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MainPage">
+    <top>
+        <GridPane alignment="CENTER" prefHeight="122.0" prefWidth="600.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="338.8" minWidth="10.0" prefWidth="257.8" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="352.4" minWidth="10.0" prefWidth="285.40000000000003" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="404.6" minWidth="10.0" prefWidth="256.6" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="53.6" minHeight="10.0" prefHeight="49.6" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="46.8" minHeight="10.0" prefHeight="32.20000000000001" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.39999999999999" minHeight="10.0" prefHeight="35.39999999999999" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label fx:id="mainLabel" prefHeight="30.0" prefWidth="257.0" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <Label text="BQ uksi" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="bqDoorsMonthlyCounter" text="Label" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="BQ aknaid" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="bqWindowsMonthlyCounter" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Polo uksi" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="poloDoorsMonthlyCounter" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <ChoiceBox fx:id="months" prefHeight="25.0" prefWidth="86.0" value="Vali kuu" GridPane.columnIndex="2">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Jaanuar" />
+                            <String fx:value="Veebruar" />
+                            <String fx:value="Märts" />
+                            <String fx:value="Aprill" />
+                            <String fx:value="Mai" />
+                            <String fx:value="Juuni" />
+                            <String fx:value="Juuli" />
+                            <String fx:value="August" />
+                            <String fx:value="September" />
+                            <String fx:value="Oktoober" />
+                            <String fx:value="November" />
+                            <String fx:value="Detsember" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+            </children>
+        </GridPane>
+    </top>
+    <center>
+        <GridPane alignment="CENTER" prefHeight="122.0" prefWidth="600.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="338.8" minWidth="10.0" prefWidth="257.8" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="352.4" minWidth="10.0" prefWidth="285.40000000000003" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="404.6" minWidth="10.0" prefWidth="256.6" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="53.6" minHeight="10.0" prefHeight="49.6" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="46.8" minHeight="10.0" prefHeight="32.20000000000001" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.39999999999999" minHeight="10.0" prefHeight="35.39999999999999" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Kokku valmistatud" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <Label text="BQ uksi" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="bqDoorsAllTimeCounter" text="5" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="BQ aknaid" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="bqWindowsAllTimeCounter" text="12" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <effect>
+                        <Bloom />
+                    </effect>
+                </Label>
+                <Label text="Polo uksi" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="poloDoorsAllTimeCounter" text="25" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </GridPane>
+    </center>
+</BorderPane>

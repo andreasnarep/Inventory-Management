@@ -17,7 +17,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Main extends Application {
@@ -31,8 +33,18 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Logic.start();
+        Enumeration<String> loggerNames = LogManager.getLogManager().getLoggerNames();
+
+        while (loggerNames.hasMoreElements()) {
+            String loggerName = loggerNames.nextElement();
+            Logger logger = LogManager.getLogManager().getLogger(loggerName);
+            logger.setLevel(Level.OFF);
+        }
+
+
         DataManager.start();
-        URL url = new File("src/main/java/gui/fxml/Tabs.fxml").toURI().toURL();
+        //URL url = new File("src/main/java/gui/fxml/Tabs.fxml").toURI().toURL();
+        URL url = new File("src/main/resources/fxml/Tabs.fxml").toURI().toURL();
         //Parent root = FXMLLoader.load(getClass().getResource("../../resources/fxml/example.fxml"));
         Parent root = FXMLLoader.load(url);
         primaryStage.setTitle("Varola");

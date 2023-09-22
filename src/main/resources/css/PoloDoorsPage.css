@@ -1,0 +1,107 @@
+.root {
+    -fx-background-color:blanchedalmond;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-effect: null;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: lightgray;
+}
+
+.label {
+    -fx-text-fill:black;
+}
+
+.tab {
+    -fx-border-radius:5px;
+    -fx-border-width:0.5px;
+    -fx-border-color:black;
+    -fx-background-radius:5px;
+    -fx-font-weight: bold;
+    -fx-focus-color: transparent;
+}
+
+.tab,
+.titled-pane{
+    -fx-background-color:gray;
+}
+
+/*.table-view {
+    -fx-background-color:lightgray;
+}*/
+
+#rollbackButton,
+#confirmButton {
+    -fx-opacity:0.70;
+}
+
+/*.list-view {
+    -fx-background-color:gray;
+    -fx-text-fill:white;
+    -fx-border-color:black;
+}*/
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, lightgray;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+.table-row-cell:odd {
+    -fx-background-color: -fx-table-cell-border-color, silver;
+}
+
+.table-view .column-header {
+    -fx-background-color: gray;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: lightgray;
+    -fx-border-radius:5px;
+    -fx-background-radius:5px;
+}
+
+.tab:selected {
+    -fx-border-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border;
+    -fx-background-color: blanchedalmond;
+}
+
+.tab:hover,
+.choice-box:hover,
+.button:hover {
+    -fx-border-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    /*-fx-border-style: solid;*/
+}
+
+.titled-pane {
+    -fx-border-radius:8px;
+    -fx-background-radius:8px;
+}
+
+
+.list-view,
+.table-view,
+.choice-box,
+.button {
+    -fx-background-color:lightgray;
+    -fx-border-radius:5px;
+    -fx-border-width:0.5px;
+    -fx-border-color:black;
+    -fx-background-radius:5px;
+    /*-fx-text-fill:white;*/
+}
+
+.choice-box {
+    -fx-mark-color:black;
+}
+
+.spinner {
+    -fx-background-color:gray;
+    -fx-text-fill:white;
+    -fx-border-radius:5px;
+    -fx-border-width:0.5px;
+    -fx-border-color:black;
+    -fx-background-radius:5px;
+}
