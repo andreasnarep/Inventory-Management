@@ -9,7 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a82d3433-6876-43fa-8796-b971422d6cdd" name="Default Changelist" comment="" />
+    <list default="true" id="a82d3433-6876-43fa-8796-b971422d6cdd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/Inventory.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Inventory.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/controllers/InventoryPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/controllers/InventoryPage$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/controllers/InventoryPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/controllers/InventoryPage.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
