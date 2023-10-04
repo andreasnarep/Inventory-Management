@@ -1,5 +1,6 @@
 main\Logic.class
 SuperMain.class
+gui\controllers\InventoryPopup.class
 gui\controllers\Tabs.class
 objects\CompletedBQWindow.class
 gui\controllers\PoloDoorsPage.class

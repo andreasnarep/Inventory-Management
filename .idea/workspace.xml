@@ -10,57 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a82d3433-6876-43fa-8796-b971422d6cdd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SuperMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Varola_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Varola_2_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/execute.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Varola_2_0/Varola_2_0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Varola_2_0/Varola_2_0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/css/PoloDoorsPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/PoloDoorsPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/BQDoorsPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BQDoorsPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/BQWindowsPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/BQWindowsPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/InventoryPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/InventoryPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/OrdersPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/OrdersPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/OrdersPagePopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/OrdersPagePopup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/PoloDoorsPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/PoloDoorsPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/Tabs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Tabs.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/fxml/TestingPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/TestingPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/DataManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/BQDoors.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/BQDoors.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/InventoryPopup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/InventoryPopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/development" beforeDir="false" afterPath="$PROJECT_DIR$/development" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/controllers/InventoryPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/InventoryPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/data/CompletedBQDoors.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/CompletedBQDoors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data/CompletedPoloDoors.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/CompletedPoloDoors.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/data/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/Inventory.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/data/Orders.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/Orders.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main/DataManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/DataManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main/DataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/DataManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main/DataReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/DataReader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main/DataWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main/DataWriter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/TestForJSON.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/TestForJSON.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/BQDoors.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/BQDoors.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data/CompletedBQDoors.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/CompletedBQDoors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/CompletedBQWindows.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/CompletedBQWindows.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/CompletedPoloDoors.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/CompletedPoloDoors.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/data/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Inventory.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/Orders.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Orders.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/controllers/OrdersPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/controllers/OrdersPage$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/controllers/OrdersPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/controllers/OrdersPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/objects/Material.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/objects/Material.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/main/TestDataManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/Other.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Other.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/controllers/InventoryPage$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/controllers/InventoryPage$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/controllers/InventoryPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/controllers/InventoryPage.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,22 +64,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/andre/Desktop/Projektid/Varola_2.0&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/andre/Desktop/Projektid/Varola_2.0",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\andre\Desktop\Projektid\Varola_2.0\src\main\resources\data\pictures" />
@@ -259,7 +222,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature_change_quantity_of_materials_in_inventory" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
