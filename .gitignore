@@ -1,6 +1,6 @@
-/resources/data/CompletedBQDoors.json
-/resources/data/CompletedBQWindows.json
-/resources/data/CompletedPoloDoors.json
-/resources/data/Orders.json
+src/resources/data/CompletedBQDoors.json
+src/resources/data/CompletedBQWindows.json
+src/resources/data/CompletedPoloDoors.json
+src/resources/data/Orders.json
 
 development.file
