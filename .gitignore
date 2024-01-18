@@ -3,4 +3,5 @@ src/main/resources/data/CompletedBQWindows.json
 src/main/resources/data/CompletedPoloDoors.json
 src/main/resources/data/Orders.json
 
-development.file
+.idea/workspace.xml
+target/
