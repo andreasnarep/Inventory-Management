@@ -1,2 +1,6 @@
-src/main/resources/data/
+/resources/data/CompletedBQDoors.json
+/resources/data/CompletedBQWindows.json
+/resources/data/CompletedPoloDoors.json
+/resources/data/Orders.json
+
 development.file
