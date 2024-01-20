@@ -1,29 +1,14 @@
-name: User Story
-description: Adds a new User Story to the project
-title: US01_Name of the user story
-labels: ["\U0001F464 User Story", "❔Unestimated"]
-projects: "sinnaj-r/2"
+name: Feature
+description: Adds a new Feature to the project
+title: Name of the Feature
+labels: ["\U0001F464 Feature", "❔Unestimated"]
+projects: "Inventory-Management"
 body:
-  - type: input
-    id: persona
-    attributes:
-      label: As a...
-      description: (Enter a persona)
-      placeholder: ex. user
-    validations:
-      required: true
   - type: textarea
-    id: requirement
+    id: feature
     attributes:
-      label: I want to...
-      description: (Enter your requirement)
-    validations:
-      required: true
-  - type: textarea
-    id: benefit
-    attributes:
-      label: So that ...
-      description: (Enter your benefit)
+      label: Description 
+      placeholder: ex. Changing quantity of material via GUI
     validations:
       required: true
   - type: markdown
@@ -42,11 +27,3 @@ body:
     attributes:
       value: |
         ---
-  - type: checkboxes
-    id: misc
-    attributes:
-      label: Milestone
-      description: I have assigned or created a milestone (aka Epic) to this userstory
-      options:
-        - label: Yes!
-          required: true
