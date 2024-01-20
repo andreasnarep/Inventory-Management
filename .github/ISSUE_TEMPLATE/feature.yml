@@ -1,0 +1,52 @@
+name: User Story
+description: Adds a new User Story to the project
+title: US01_Name of the user story
+labels: ["\U0001F464 User Story", "❔Unestimated"]
+projects: "sinnaj-r/2"
+body:
+  - type: input
+    id: persona
+    attributes:
+      label: As a...
+      description: (Enter a persona)
+      placeholder: ex. user
+    validations:
+      required: true
+  - type: textarea
+    id: requirement
+    attributes:
+      label: I want to...
+      description: (Enter your requirement)
+    validations:
+      required: true
+  - type: textarea
+    id: benefit
+    attributes:
+      label: So that ...
+      description: (Enter your benefit)
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ---
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "Acceptance Criteria:"
+      description: Add a list of acceptance criteria/conditions.
+      value: "- [ ] Criteria 1"
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        ---
+  - type: checkboxes
+    id: misc
+    attributes:
+      label: Milestone
+      description: I have assigned or created a milestone (aka Epic) to this userstory
+      options:
+        - label: Yes!
+          required: true
