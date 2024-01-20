@@ -71,9 +71,9 @@ public class DataManager {
 
     private static void setupMailService() {
         host = "smtp.gmail.com";
-        user = "andreasnarep2@gmail.com";//change accordingly
-        password = "ifslypzmdwrpoktx";//change accordingly
-        to = "andreasnarep2@gmail.com";//change accordingly
+        user = "";//change accordingly
+        password = "";//change accordingly
+        to = "";//change accordingly
 
         props = new Properties();
         props.put("mail.smtp.host", host);
