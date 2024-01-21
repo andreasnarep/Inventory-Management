@@ -4,4 +4,5 @@ src/main/resources/data/CompletedPoloDoors.json
 src/main/resources/data/Orders.json
 
 .idea/workspace.xml
+.github/ISSUE_TEMPLATE/
 target/
