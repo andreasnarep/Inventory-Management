@@ -11,6 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a82d3433-6876-43fa-8796-b971422d6cdd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/CompletedBQDoors.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/CompletedBQDoors.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/CompletedBQWindows.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/CompletedBQWindows.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Inventory.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MainPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +87,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestDataManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Varola_2.0" />
