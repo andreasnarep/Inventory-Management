@@ -2,7 +2,13 @@ src/main/resources/data/CompletedBQDoors.json
 src/main/resources/data/CompletedBQWindows.json
 src/main/resources/data/CompletedPoloDoors.json
 src/main/resources/data/Orders.json
+src/main/resources/data/Inventory.json
 
-.idea/workspace.xml
 .github/ISSUE_TEMPLATE/
 target/
+
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml

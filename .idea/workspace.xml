@@ -9,7 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a82d3433-6876-43fa-8796-b971422d6cdd" name="Default Changelist" comment="" />
+    <list default="true" id="a82d3433-6876-43fa-8796-b971422d6cdd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/main/TestDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/main/TestDataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/data/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Inventory.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/DataManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/DataManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/DataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/DataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/DataReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/DataReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/DataWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/DataWriter.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,10 +73,10 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -80,7 +91,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.TestDataManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Varola_2.0" />
@@ -96,6 +107,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestDataManager" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Varola_2.0" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="main.TestDataManager" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDataManager.addingBQDoorAndChangingMonth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Varola_2.0" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="main.TestDataManager" />
+      <option name="METHOD_NAME" value="addingBQDoorAndChangingMonth" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestDataManager.addingBQDoorWithRollback" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Varola_2.0" />
       <extension name="coverage">
@@ -107,22 +149,6 @@
       <option name="PACKAGE_NAME" value="main" />
       <option name="MAIN_CLASS_NAME" value="main.TestDataManager" />
       <option name="METHOD_NAME" value="addingBQDoorWithRollback" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestDataManager.addingBQWindowWithRollback" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Varola_2.0" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="main" />
-      <option name="MAIN_CLASS_NAME" value="main.TestDataManager" />
-      <option name="METHOD_NAME" value="addingBQWindowWithRollback" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -144,22 +170,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDataManager.addingPoloDoorWithRollback" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Varola_2.0" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="main" />
-      <option name="MAIN_CLASS_NAME" value="main.TestDataManager" />
-      <option name="METHOD_NAME" value="addingPoloDoorWithRollback" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,18 +184,18 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.SuperMain" />
+      <item itemvalue="JUnit.TestDataManager" />
+      <item itemvalue="JUnit.TestDataManager.addingBQDoorAndChangingMonth" />
       <item itemvalue="JUnit.TestDataManager.addingBQDoorWithRollback" />
-      <item itemvalue="JUnit.TestDataManager.addingBQWindowWithRollback" />
       <item itemvalue="JUnit.TestDataManager.addingMixedDoorsAndWindows" />
-      <item itemvalue="JUnit.TestDataManager.addingPoloDoorWithRollback" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestDataManager" />
+        <item itemvalue="JUnit.TestDataManager.addingBQDoorAndChangingMonth" />
         <item itemvalue="Application.SuperMain" />
         <item itemvalue="JUnit.TestDataManager.addingMixedDoorsAndWindows" />
         <item itemvalue="JUnit.TestDataManager.addingBQDoorWithRollback" />
-        <item itemvalue="JUnit.TestDataManager.addingBQWindowWithRollback" />
-        <item itemvalue="JUnit.TestDataManager.addingPoloDoorWithRollback" />
       </list>
     </recent_temporary>
   </component>

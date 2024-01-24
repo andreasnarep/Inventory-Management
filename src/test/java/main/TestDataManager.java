@@ -4,6 +4,7 @@ import objects.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 
 import java.time.LocalDate;
@@ -295,4 +296,38 @@ public class TestDataManager {
         Assert.assertEquals( 0, DataManager.getCompletedPoloDoorsSession().size() );
         Assert.assertEquals( 1, DataManager.getCompletedPoloDoors().size() );
     }
+
+    @Test
+    public void addingBQDoorWithDifferentMonth() {
+        LocalDate date = LocalDate.of(LocalDate.now().getYear(), 2, 1);
+        DataManager.addCompletedBQDoor( new CompletedBQDoor( "1690x1900 1/1", date, 3 ) );
+
+        DataManager.confirmCompletedBQDoors();
+
+        Assert.assertEquals(2, DataManager.getCompletedBQDoors().get(0).getDate().getMonthValue());
+    }
+
+    @Test
+    public void addingBQWindowWithDifferentMonth() {
+        LocalDate date = LocalDate.of(LocalDate.now().getYear(), 4, 1);
+        DataManager.addCompletedBQWindow( new CompletedBQWindow( "1390x1000", date, 1 ) );
+
+        DataManager.confirmCompletedBQWindows();
+
+        Assert.assertEquals(4, DataManager.getCompletedBQWindows().get(0).getDate().getMonthValue());
+    }
+
+    @Test
+    public void addingPoloDoorWithDifferentMonth() {
+        LocalDate date = LocalDate.of(LocalDate.now().getYear(), 10, 1);
+        DataManager.addCompletedPoloDoor( new CompletedPoloDoor( "1690x1900 1/1", date, 2 ) );
+
+        DataManager.confirmCompletedPoloDoors();
+
+        Assert.assertEquals(10, DataManager.getCompletedPoloDoors().get(0).getDate().getMonthValue());
+    }
+
+    //DataManager.addCompletedPoloDoor( new CompletedPoloDoor( "1690x1900 1/1", LocalDate.now(), 2 ) );
+    //DataManager.addCompletedBQDoor( new CompletedBQDoor( "1690x1900 1/1", LocalDate.now(), 4 ) );
+    //DataManager.addCompletedBQWindow( new CompletedBQWindow( "1390x1000", LocalDate.now(), 1 ) );
 }
