@@ -1,0 +1,29 @@
+name: Feature
+description: Adds a new Feature to the project
+title: Name of the Feature
+labels: ["\U0001F464 Feature", "❔Unestimated"]
+projects: "Inventory-Management"
+body:
+- type: textarea
+  id: feature
+  attributes:
+  label: Description
+  placeholder: ex. Changing quantity of material via GUI
+  validations:
+  required: true
+- type: markdown
+  attributes:
+  value: |
+  ---
+- type: textarea
+  id: acceptance-criteria
+  attributes:
+  label: "Acceptance Criteria:"
+  description: Add a list of acceptance criteria/conditions.
+  value: "- [ ] Criteria 1"
+  validations:
+  required: false
+- type: markdown
+  attributes:
+  value: |
+  ---
