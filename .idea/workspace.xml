@@ -10,12 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a82d3433-6876-43fa-8796-b971422d6cdd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/MainPagePopup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainPagePopup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/controllers/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/MainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/CompletedBQDoors.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/CompletedBQDoors.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/CompletedBQWindows.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/CompletedBQWindows.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/data/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/data/Inventory.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MainPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -72,7 +70,7 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.build"
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -221,7 +219,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="overview-of-completed-products-iss2" />
                       </list>
                     </value>
                   </entry>
