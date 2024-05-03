@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import main.DataManager;
 import objects.BQDoor;
 import objects.CompletedBQDoor;
-import objects.CompletedPoloDoor;
 
 import java.net.URL;
 import java.time.LocalDate;

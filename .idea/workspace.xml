@@ -10,10 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a82d3433-6876-43fa-8796-b971422d6cdd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/MainPagePopup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainPagePopup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/controllers/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/controllers/BQDoorsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/controllers/BQDoorsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data/Inventory.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/Inventory.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MainPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/controllers/BQDoorsPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/controllers/BQDoorsPage.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,24 +58,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TODO_SCOPE": "All Places",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Program Files/Java/javafx-sdk-20/bin",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Program Files/Java/javafx-sdk-20/bin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\andre\Desktop\Projektid\Varola_2.0" />
@@ -219,7 +222,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="overview-of-completed-products-iss2" />
+                        <option value="change-door-or-window-date-iss3" />
                       </list>
                     </value>
                   </entry>

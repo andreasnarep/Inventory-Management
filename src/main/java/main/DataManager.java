@@ -121,45 +121,6 @@ public class DataManager {
                     throw new FileNotFoundException(file);
             }
         }
-
-        /*
-        System.out.println( "----------------" );
-        for ( String door : bqDoors.keySet() )
-            System.out.println( bqDoors.get( door ) );
-
-        System.out.println( "----------------" );
-        for ( String material : inventory.keySet() )
-            System.out.println( material );
-
-        System.out.println( "----------------" );
-        for ( CompletedPoloDoor door : completedPoloDoors )
-            System.out.println( door );
-
-        System.out.println( "----------------" );
-        for ( CompletedBQDoor door : completedBQDoors )
-            System.out.println( door );
-
-        System.out.println( "----------------" );
-        for ( CompletedBQWindow window : completedBQWindows )
-            System.out.println( window );
-
-        System.out.println( "----------------" );
-        for ( String key : orders.keySet() )
-            System.out.println( orders.get( key ) );
-
-        System.out.println( "----------------" );
-        for ( Material material : lowerLimitInventory )
-            System.out.println( material );
-
-        System.out.println( "----------------" );
-        for ( String glass : glasses )
-            System.out.println( glass );
-
-        System.out.println( "----------------" );
-        for ( String key : boxes.keySet() )
-            System.out.println( boxes.get( key ) );
-
-         */
     }
 
     public static void sendOrderByMail(Order order) {
