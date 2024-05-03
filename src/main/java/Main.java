@@ -47,7 +47,7 @@ public class Main extends Application {
         URL url = new File("src/main/resources/fxml/Tabs.fxml").toURI().toURL();
         //Parent root = FXMLLoader.load(getClass().getResource("../../resources/fxml/example.fxml"));
         Parent root = FXMLLoader.load(url);
-        primaryStage.setTitle("Varola");
+        primaryStage.setTitle("Inventory");
         primaryStage.setScene(new Scene(root, 700, 500));
         primaryStage.setMinHeight( 487 );
         primaryStage.setMinWidth( 668 );
