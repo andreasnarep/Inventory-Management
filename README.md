@@ -7,10 +7,10 @@ Purpose of this application is to make inventory management easier with an easy 
 > You need to have Java installed on your computer
 
 * Running from the command line:
-  * Use `java -jar Varola_2.0.jar`
+  * Use `java -jar Inventory.jar`
   * Run the command from project root, where the .jar file is located
 * Running from the folder:
   * Go to the project root folder
-  * Click on file **Varola_2.0.jar**
+  * Click on file **Inventory.jar**
 
 
